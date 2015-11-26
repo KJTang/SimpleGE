@@ -7,12 +7,17 @@ GameObject::~GameObject() {}
 bool GameObject::init() {
     isActive = true;
     parent = nullptr;
+    texture = nullptr;
     // mesh
     AEGfxMeshStart();
     //AEGfxTriAdd(
-    //    -0.5f, 0.5f, 0x01FF0000, 0.0f, 0.0f,
-    //    -0.5f, -0.5f, 0xFFFF0000, 0.0f, 0.0f,
-    //    0.5f, 0.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+    //    -1.0f, -1.0f, 0x00000000, 0.0f, 1.0f,
+    //    1.0f, -1.0f, 0x00000000, 1.0f, 1.0f,
+    //    -1.0f, 1.0f, 0x00000000, 0.0f, 0.0f);
+    //AEGfxTriAdd(
+    //    1.0f, -1.0f, 0x00000000, 1.0f, 1.0f,
+    //    1.0f, 1.0f, 0x00000000, 1.0f, 0.0f,
+    //    -1.0f, 1.0f, 0x00000000, 0.0f, 0.0f);
     auto newMesh = AEGfxMeshEnd();
     this->setMesh(newMesh);
 
@@ -20,6 +25,32 @@ bool GameObject::init() {
     this->setPosition(0, 0);
     this->setVelocity(0, 0);
     this->setDirection(0.0f);
+    return true;
+}
+
+bool GameObject::init(const std::string &textureName) {
+    isActive = true;
+    parent = nullptr;
+    texture = nullptr;
+    // mesh
+    AEGfxMeshStart();
+    AEGfxTriAdd(
+        -1.0f, -1.0f, 0x00FFFFFF, 0.0f, 1.0f,
+        1.0f, -1.0f, 0x00FFFFFF, 1.0f, 1.0f,
+        -1.0f, 1.0f, 0x00FFFFFF, 0.0f, 0.0f);
+    AEGfxTriAdd(
+        1.0f, -1.0f, 0x00FFFFFF, 1.0f, 1.0f,
+        1.0f, 1.0f, 0x00FFFFFF, 1.0f, 0.0f,
+        -1.0f, 1.0f, 0x00FFFFFF, 0.0f, 0.0f);
+    auto newMesh = AEGfxMeshEnd();
+    this->setMesh(newMesh);
+
+    this->setSize(50.0f);
+    this->setPosition(0, 0);
+    this->setVelocity(0, 0);
+    this->setDirection(0.0f);
+
+    texture = AEGfxTextureLoad(textureName.c_str());
     return true;
 }
 
@@ -44,12 +75,24 @@ void GameObject::update() {
 }
 
 void GameObject::draw() {
-    // 设置所有参数(Color blend, textures, etc..)
-    AEGfxSetBlendMode(AE_GFX_RM_COLOR);
-    // 设置对象的2D变换矩阵，使用函数：AEGfxSetTransform
-    AEGfxSetTransform((*this->getTransformMatrix()).m);
-    // 绘制当前对象，使用函数：AEGfxMeshDraw
-    AEGfxMeshDraw(this->getMesh(), AE_GFX_MDM_TRIANGLES);
+    if (!texture) {
+        // 设置所有参数(Color blend, textures, etc..)
+        AEGfxSetBlendMode(AE_GFX_RM_COLOR);
+        AEGfxTextureSet(nullptr, 0, 0);
+        // 设置对象的2D变换矩阵，使用函数：AEGfxSetTransform
+        AEGfxSetTransform((*this->getTransformMatrix()).m);
+        // 绘制当前对象，使用函数：AEGfxMeshDraw
+        AEGfxMeshDraw(this->getMesh(), AE_GFX_MDM_TRIANGLES);
+    }
+    else {
+        AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+        AEGfxTextureSet(texture, 0, 0);
+        AEGfxSetTextureMode(AE_GFX_TM_AVERAGE);
+        // 设置对象的2D变换矩阵，使用函数：AEGfxSetTransform
+        AEGfxSetTransform((*this->getTransformMatrix()).m);
+        // 绘制当前对象，使用函数：AEGfxMeshDraw
+        AEGfxMeshDraw(this->getMesh(), AE_GFX_MDM_TRIANGLES);
+    }
 }
 
 void GameObject::destroy() {

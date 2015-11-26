@@ -6,3 +6,10 @@ static __TYPE__* create() { \
     pObject->init(); \
     return pObject; \
 }
+
+#define CREATE_FUNC_WITH_STR(__TYPE__) \
+static __TYPE__* create(const std::string &str) { \
+    auto pObject = new __TYPE__(); \
+    pObject->init(str); \
+    return pObject; \
+}

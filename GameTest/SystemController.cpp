@@ -131,6 +131,8 @@ void SystemController::recursiveUpdate(GameObject* go) {
 void SystemController::draw() {
     assert(rootObject);
     AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+    //AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+    AEGfxSetTextureMode(AE_GFX_TM_AVERAGE);
     AEGfxTextureSet(NULL, 0, 0);
     AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
     // 设置绘制模式(Color or texture)

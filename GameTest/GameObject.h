@@ -19,6 +19,7 @@ private:
     AEVec2 velCurr;	// 当前速度
     float dirCurr;	// 当前方向
     AEMtx33 transform;	// 变换矩阵：每一帧都需要为每一个对象计算
+    AEGfxTexture* texture; // GameObject 的纹理
 
     GameObject* parent; // 当前节点的parent
     vector<GameObject*> children; // 当前节点的children
@@ -29,6 +30,7 @@ public:
     ~GameObject();
 
     CREATE_FUNC(GameObject);
+    CREATE_FUNC_WITH_STR(GameObject);
 
     // active
     void setActive(bool ac) { isActive = ac; }
@@ -63,8 +65,11 @@ public:
     void setTransformMatrix(AEMtx33 trans) { transform = trans; }
     AEMtx33* getTransformMatrix() { return &transform; }
 
+    void setTexture(AEGfxTexture *tex) { texture = tex; }
+
     // virtual functions
     virtual bool init();
+    virtual bool init(const std::string &textureName);
     virtual void update();
     virtual void draw();
     virtual void destroy();

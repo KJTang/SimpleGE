@@ -14,28 +14,21 @@ bool LevelOne::init() {
     }
     count = 0;
 
-    auto go = Ship::create();
+    auto go = GameObject::create("test.png");
     this->addChild(go);
-    go->addAbility(PlayerAI::create(go));
-    auto go2 = Ship::create();
-    auto pos = go2->getPosition();
-    pos.y += 10;
-    go2->setPosition(pos);
-    this->addChild(go2);
-    go2->setDirection(3.14f);
-    go2->setVelocity(10, -20);
-    go2->addAbility(TestAbility::create(go2));
+    go->setPosition(0, 0);
+    go->setSize(20);
 
     return true;
 }
 
 void LevelOne::update() {
     Level::update();
-    //if (count >= 300) {
-    //    GameLog("LevelChange: LevelOne to LevelTwo");
-    //    SystemController::getInstance()->setNextLevel(LevelTwo::create());
-    //}
-    //++count;
+    if (count >= 300) {
+        GameLog("LevelChange: LevelOne to LevelTwo");
+        SystemController::getInstance()->setNextLevel(LevelTwo::create());
+    }
+    ++count;
 }
 
 /********************
@@ -50,13 +43,13 @@ bool LevelTwo::init() {
     }
     count = 0;
 
-    auto go = Ship::create();
+    auto go = GameObject::create("test.png");
     this->addChild(go);
-    auto go2 = Ship::create();
+    auto go2 = GameObject::create("test.png");
+    this->addChild(go2);
     auto pos = go2->getPosition();
     pos.y += 10;
     go2->setPosition(pos);
-    this->addChild(go2);
     go2->setDirection(3.14f);
     go2->setVelocity(-30, 0);
 
