@@ -58,8 +58,43 @@ bool LevelTwo::init() {
 
 void LevelTwo::update() {
     Level::update();
-    if (count >= 180) {
-        SystemController::getInstance()->quitGame();
+    if (count >= 300) {
+		GameLog("LevelChange: LevelTwo to LevelThree");
+		SystemController::getInstance()->setNextLevel(LevelThree::create());
     }
     ++count;
+}
+
+/********************
+Level Three
+*******************/
+LevelThree::LevelThree() {}
+LevelThree::~LevelThree() {}
+
+bool LevelThree::init() {
+	if (!Level::init()) {
+		return false;
+	}
+	count = 0;
+
+	auto go = GameObject::create("test.png");
+	this->addChild(go);
+	auto pos = go->getPosition();
+	pos.x += 10;
+	pos.y += 10;
+	go->setPositionX(pos.x);
+	go->setPositionY(pos.y);
+	go->setDirection(3.14f);
+	go->setVelocity(10, 10);
+
+
+	return true;
+}
+
+void LevelThree::update() {
+	Level::update();
+	if (count >= 500) {
+		SystemController::getInstance()->quitGame();
+	}
+	++count;
 }

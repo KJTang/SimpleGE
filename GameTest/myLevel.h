@@ -27,3 +27,16 @@ public:
     virtual bool init();
     virtual void update();
 };
+
+class LevelThree : public Level {
+private:
+	int count;
+public:
+	LevelThree();
+	~LevelThree();
+
+	CREATE_FUNC(LevelThree);
+
+	virtual bool init();
+	virtual void update();
+};
