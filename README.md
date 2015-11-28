@@ -17,6 +17,10 @@
 	my work is encapsulation it by C++, and I took Cocos2d-x for reference, 
 	so when using SimpleGE, it looks like using Cocos2d-x sometimes XD.
 
+####*Tutorial:*####
+	1. [中文](https://github.com/KJTang/SimpleGE/blob/master/Tutorial/Zh/README.md)
+	2. English
+	
 ####*About this Repo:*####
 	in this repo, there's not only a "SimpleGE",
 	but also a little game developped by "SimpleGE",
