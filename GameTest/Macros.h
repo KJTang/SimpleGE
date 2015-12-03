@@ -1,5 +1,7 @@
 #pragma once
 
+const int CONST_FPS = 60;
+
 #define CREATE_FUNC(__TYPE__) \
 static __TYPE__* create() { \
     auto pObject = new __TYPE__(); \

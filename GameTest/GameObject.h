@@ -13,6 +13,7 @@ using std::vector;
 class GameObject {
 private:
     bool isActive; // 若处于非活动状态则关闭update
+    bool isVisible; // 若不可见则关闭draw
     AEGfxVertexList*	pMesh; // 形状
     float size; // 大小
     AEVec2 posCurr;	 // 当前位置
@@ -35,6 +36,9 @@ public:
     // active
     void setActive(bool ac) { isActive = ac; }
     bool getActive() { return isActive; }
+    // visible
+    void setVisible(bool vi) { isVisible = vi; }
+    bool getVisible() { return isVisible; }
     // getter & setter
     void setSize(float s) { size = s; }
     float getSize() { return size; }

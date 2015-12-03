@@ -6,3 +6,4 @@
 #include "GameObject.h"
 #include "Level.h"
 #include "Ability.h"
+#include "Animation.h"

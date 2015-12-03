@@ -141,7 +141,7 @@ void SystemController::draw() {
 }
 
 void SystemController::recursiveDraw(GameObject* go) {
-    if (go->getActive()) {
+    if (go->getVisible()) {
         go->draw();
         for (auto it = go->getChildren().begin(); it != go->getChildren().end(); ++it) {
             recursiveDraw((*it));

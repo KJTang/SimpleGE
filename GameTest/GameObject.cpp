@@ -6,6 +6,7 @@ GameObject::~GameObject() {}
 
 bool GameObject::init() {
     isActive = true;
+    isVisible = true;
     parent = nullptr;
     texture = nullptr;
     // mesh
@@ -25,11 +26,13 @@ bool GameObject::init() {
     this->setPosition(0, 0);
     this->setVelocity(0, 0);
     this->setDirection(0.0f);
+
     return true;
 }
 
 bool GameObject::init(const std::string &textureName) {
     isActive = true;
+    isVisible = true;
     parent = nullptr;
     texture = nullptr;
     // mesh
@@ -51,6 +54,7 @@ bool GameObject::init(const std::string &textureName) {
     this->setDirection(0.0f);
 
     texture = AEGfxTextureLoad(textureName.c_str());
+
     return true;
 }
 

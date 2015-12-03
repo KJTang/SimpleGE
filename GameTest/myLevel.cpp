@@ -14,10 +14,22 @@ bool LevelOne::init() {
     }
     count = 0;
 
-    auto go = GameObject::create("test.png");
+    go = GameObject::create("test.png");
     this->addChild(go);
     go->setPosition(0, 0);
     go->setSize(20);
+    go->addAbility(PlayerAI::create(go));
+    //go->setActive(false);
+    //go->setVisible(false);
+
+    auto ani = Animation::create();
+    this->addChild(ani);
+    ani->addFrame("animation01.png");
+    ani->addFrame("animation02.png");
+    ani->addFrame("animation03.png");
+    ani->start(0.5, 1);
+    ani->setSize(20);
+    ani->setPosition(100, 0);
 
     return true;
 }

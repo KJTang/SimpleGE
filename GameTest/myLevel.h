@@ -5,6 +5,7 @@
 class LevelOne : public Level {
 private:
     int count;
+    GameObject* go;
 public:
     LevelOne();
     ~LevelOne();
