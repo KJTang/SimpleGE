@@ -18,14 +18,9 @@ bool LevelOne::init() {
     this->addChild(go);
     go->setPosition(-100, 0);
     go->setSize(20);
-    go->addAbility(PlayerAI::create(go));
     //go->setActive(false);
     //go->setVisible(false);
-
-    auto go2 = GameObject::create("test.png");
-    go->addChild(go2);
-    go2->setPosition(0, 100);
-    //printf("%.2f, %.2f", go2->getRealPosition().x, go2->getRealPosition().y);
+    go->setVelocity(30, 0);
 
     auto ani = Animation::create();
     this->addChild(ani);

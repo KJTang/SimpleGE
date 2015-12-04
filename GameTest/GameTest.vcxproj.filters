@@ -133,7 +133,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\SimpleGE</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

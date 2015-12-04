@@ -24,8 +24,4 @@ public:
     virtual void update();
 
     void setSize(float size);
-    //void setPosition(float x, float y);
-    //void setPosition(AEVec2 pos) { this->setPosition(pos.x, pos.y); }
-    //void setPositionX(float x) { this->setPosition(x, this->getPositionY()); }
-    //void setPositionY(float y) { this->setPosition(this->getPositionX(), y); }
 };

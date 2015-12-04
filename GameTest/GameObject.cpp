@@ -23,8 +23,8 @@ bool GameObject::init() {
     this->setMesh(newMesh);
 
     this->setSize(0.0f);
-    //this->setPosition(0, 0);
-    this->setRealPosition(0, 0);
+    this->setPosition(0, 0);
+    isPosInit = false;
     this->setVelocity(0, 0);
     this->setDirection(0.0f);
 
@@ -50,8 +50,8 @@ bool GameObject::init(const std::string &textureName) {
     this->setMesh(newMesh);
 
     this->setSize(50.0f);
-    //this->setPosition(0, 0);
-    this->setRealPosition(0, 0);
+    this->setPosition(0, 0);
+    isPosInit = false;
     this->setVelocity(0, 0);
     this->setDirection(0.0f);
 
@@ -61,12 +61,16 @@ bool GameObject::init(const std::string &textureName) {
 }
 
 void GameObject::update() {
+    if (!isPosInit) {
+        this->setRealPosition(convertToGlobalPosition(this, posRelative)); // 先更新当前位置
+        isPosInit = true;
+    }
     // 更新位置
     AEVec2 added, newPos;
-    this->setRealPosition(convertToGlobalPosition(this, posRelative)); // 先更新当前位置
     auto frameTime = static_cast<float>(AEFrameRateControllerGetFrameTime());
     AEVec2Set(&added, this->getVelocity().x * frameTime, this->getVelocity().y * frameTime);
-    AEVec2Add(&newPos, &this->getRealPosition(), &added);
+    newPos.x = posGlobal.x + added.x;
+    newPos.y = posGlobal.y + added.y;
     this->setRealPosition(newPos);
 
     AEMtx33 trans, rot, scale;

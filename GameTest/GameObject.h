@@ -15,6 +15,7 @@ private:
     bool isVisible; // 若不可见则关闭draw
     AEGfxVertexList*	pMesh; // 形状
     float size; // 大小
+    bool isPosInit;
     AEVec2 posRelative;	 // 相对位置
     AEVec2 posGlobal; // 全局位置
     AEVec2 velCurr;	// 当前速度
