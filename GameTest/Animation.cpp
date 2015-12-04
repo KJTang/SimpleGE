@@ -65,9 +65,9 @@ void Animation::setSize(float size) {
     }
 }
 
-void Animation::setPosition(float x, float y) {
-    GameObject::setPosition(x, y);
-    for (auto it = AnimationFrame.begin(); it != AnimationFrame.end(); ++it) {
-        (*it)->setPosition(x, y);
-    }
-}
+//void Animation::setPosition(float x, float y) {
+//    GameObject::setPosition(x, y);
+//    for (auto it = AnimationFrame.begin(); it != AnimationFrame.end(); ++it) {
+//        (*it)->setPosition(x, y);
+//    }
+//}

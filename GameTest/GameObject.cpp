@@ -23,7 +23,8 @@ bool GameObject::init() {
     this->setMesh(newMesh);
 
     this->setSize(0.0f);
-    this->setPosition(0, 0);
+    //this->setPosition(0, 0);
+    this->setRealPosition(0, 0);
     this->setVelocity(0, 0);
     this->setDirection(0.0f);
 
@@ -49,7 +50,8 @@ bool GameObject::init(const std::string &textureName) {
     this->setMesh(newMesh);
 
     this->setSize(50.0f);
-    this->setPosition(0, 0);
+    //this->setPosition(0, 0);
+    this->setRealPosition(0, 0);
     this->setVelocity(0, 0);
     this->setDirection(0.0f);
 
@@ -61,10 +63,11 @@ bool GameObject::init(const std::string &textureName) {
 void GameObject::update() {
     // 更新位置
     AEVec2 added, newPos;
+    this->setRealPosition(convertToGlobalPosition(this, posRelative)); // 先更新当前位置
     auto frameTime = static_cast<float>(AEFrameRateControllerGetFrameTime());
     AEVec2Set(&added, this->getVelocity().x * frameTime, this->getVelocity().y * frameTime);
-    AEVec2Add(&newPos, &this->getPosition(), &added);
-    this->setPosition(newPos);
+    AEVec2Add(&newPos, &this->getRealPosition(), &added);
+    this->setRealPosition(newPos);
 
     AEMtx33 trans, rot, scale;
     // 缩放矩阵
@@ -72,7 +75,7 @@ void GameObject::update() {
     // 旋转矩阵
     AEMtx33Rot(&rot, this->getDirection());
     // 平移矩阵
-    AEMtx33Trans(&trans, this->getPosition().x, this->getPosition().y);
+    AEMtx33Trans(&trans, this->getRealPosition().x, this->getRealPosition().y);
     // 以正确的顺序连乘以上3个矩阵形成2维变换矩阵
     AEMtx33Concat(this->getTransformMatrix(), &trans, &rot);
     AEMtx33Concat(this->getTransformMatrix(), this->getTransformMatrix(), &scale);
@@ -108,12 +111,17 @@ void GameObject::destroy() {
     delete this;
 }
 
+void GameObject::setParent(GameObject* p) {
+    parent = p;
+}
+
 GameObject* GameObject::getParent() {
     return parent;
 }
 
 void GameObject::addChild(GameObject* child) {
     children.push_back(child);
+    child->setParent(this);
 }
 
 void GameObject::removeChild(GameObject* child) {
