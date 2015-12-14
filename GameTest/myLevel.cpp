@@ -52,6 +52,7 @@ bool LevelTwo::init() {
     go2->setPosition(pos);
     go2->setDirection(3.14f);
     go2->setVelocity(-30, 0);
+	go2->addAbility(PlayerAI::create(go2));
 
     return true;
 }
