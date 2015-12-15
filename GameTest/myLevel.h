@@ -2,6 +2,9 @@
 
 #include "SimpleGE.h"
 
+//add by wdp
+#include "MapController.h"
+
 class LevelOne : public Level {
 private:
     int count;

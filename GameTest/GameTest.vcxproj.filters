@@ -99,6 +99,9 @@
     <ClInclude Include="Animation.h">
       <Filter>Header Files\SimpleGE</Filter>
     </ClInclude>
+    <ClInclude Include="MapController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
@@ -134,6 +137,9 @@
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\SimpleGE</Filter>
+    </ClCompile>
+    <ClCompile Include="MapController.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

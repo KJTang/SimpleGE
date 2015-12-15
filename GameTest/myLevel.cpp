@@ -5,6 +5,9 @@
 /********************
 Level One
 *******************/
+
+//size¶¼Îª20
+
 LevelOne::LevelOne() {}
 LevelOne::~LevelOne() {}
 
@@ -14,13 +17,26 @@ bool LevelOne::init() {
     }
     count = 0;
 
-    go = GameObject::create("test.png");
-    this->addChild(go);
-    go->setPosition(-100, 0);
-    go->setSize(20);
-    //go->setActive(false);
-    //go->setVisible(false);
-    go->setVelocity(30, 0);
+	auto layer = GameObject::create();
+	this->addChild(layer);
+	MapController::getInstance()->createMapFromFile("wdp.txt", layer);
+
+    //go = GameObject::create("test.png");
+    //this->addChild(go);
+    //go->setPosition(-100, 0);
+    //go->setSize(10);
+    ////go->setActive(false);
+    ////go->setVisible(false);
+    //go->setVelocity(-30, 0);
+
+	auto test = GameObject::create("test.png");
+	this->addChild(test);
+	test->addAbility(PlayerAI::create(test));
+	test->setPosition(0, 0);
+	test->setSize(10);
+	int flag = MapController::getInstance()->getObjectType(test);
+	if (flag)
+		GameLog("collision");
 
     auto ani = Animation::create();
     this->addChild(ani);
@@ -28,15 +44,15 @@ bool LevelOne::init() {
     ani->addFrame("animation02.png");
     ani->addFrame("animation03.png");
     ani->start(0.5, -1);
-    ani->setSize(20);
-    ani->setPosition(100, 100);
+    ani->setSize(10);
+    ani->setPosition(0, 0);
 
     return true;
 }
 
 void LevelOne::update() {
     Level::update();
-    if (count >= 300) {
+    if (count >= CONST_FPS * 30) {
         GameLog("LevelChange: LevelOne to LevelTwo");
         SystemController::getInstance()->setNextLevel(LevelTwo::create());
     }
@@ -70,7 +86,7 @@ bool LevelTwo::init() {
 
 void LevelTwo::update() {
     Level::update();
-    if (count >= 300) {
+    if (count >= 60) {
 		GameLog("LevelChange: LevelTwo to LevelThree");
 		SystemController::getInstance()->setNextLevel(LevelThree::create());
     }
@@ -89,15 +105,15 @@ bool LevelThree::init() {
 	}
 	count = 0;
 
-	//auto go = GameObject::create("test.png");
-	//this->addChild(go);
-	//auto pos = go->getPosition();
-	//pos.x += 10;
-	//pos.y += 10;
-	//go->setPositionX(pos.x);
-	//go->setPositionY(pos.y);
-	//go->setDirection(3.14f);
-	//go->setVelocity(10, 10);
+	/*auto go = GameObject::create("test.png");
+	this->addChild(go);
+	auto pos = go->getPosition();
+	pos.x += 10;
+	pos.y += 10;
+	go->setPositionX(pos.x);
+	go->setPositionY(pos.y);
+	go->setDirection(3.14f);
+	go->setVelocity(10, 10);*/
 
 
 	return true;
@@ -105,7 +121,7 @@ bool LevelThree::init() {
 
 void LevelThree::update() {
 	Level::update();
-	if (count >= 500) {
+	if (count >= 60) {
 		SystemController::getInstance()->quitGame();
 	}
 	++count;
