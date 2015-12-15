@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\AlphaEngine">
+      <UniqueIdentifier>{f2c66f7f-21c1-4ed1-bba9-d17211379752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SimpleGE">
+      <UniqueIdentifier>{d60432ce-e186-4954-9741-3d1635d2524e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SimpleGE">
+      <UniqueIdentifier>{31eb4dac-7c02-4ef3-9bfa-03d62422d5ca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="3DPipelineTools.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AECollision.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AEEngine.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AEExport.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AEFrameRateController.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AEGameStateMgr.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AEGraphics.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AEInput.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AELineSegment2.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AEMath.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AEMtx33.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AESystem.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AETypes.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AEUtil.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AEVec2.h">
+      <Filter>Header Files\AlphaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files\SimpleGE</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\SimpleGE</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemController.h">
+      <Filter>Header Files\SimpleGE</Filter>
+    </ClInclude>
+    <ClInclude Include="myLevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="myObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ability.h">
+      <Filter>Header Files\SimpleGE</Filter>
+    </ClInclude>
+    <ClInclude Include="myAbility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Macros.h">
+      <Filter>Header Files\SimpleGE</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleGE.h">
+      <Filter>Header Files\SimpleGE</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\SimpleGE</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterAI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.h">
+      <Filter>Header Files\SimpleGE</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Alpha_Engine.dll" />
+    <None Include="glew32.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Alpha_Engine.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\SimpleGE</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\SimpleGE</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemController.cpp">
+      <Filter>Source Files\SimpleGE</Filter>
+    </ClCompile>
+    <ClCompile Include="myLevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="myObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ability.cpp">
+      <Filter>Source Files\SimpleGE</Filter>
+    </ClCompile>
+    <ClCompile Include="myAbility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\SimpleGE</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterAI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

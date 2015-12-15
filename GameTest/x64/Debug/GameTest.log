@@ -1,0 +1,71 @@
+﻿生成启动时间为 2015/12/15 19:00:28。
+     1>项目“C:\Users\jiadong\Desktop\游戏开发\PacMan\SimpleGE\GameTest\GameTest.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Applications\VC\bin\x86_amd64\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt Ability.cpp Animation.cpp GameObject.cpp GameTest.cpp Level.cpp myAbility.cpp myLevel.cpp myObject.cpp SystemController.cpp
+         SystemController.cpp
+     1>c:\users\jiadong\desktop\游戏开发\pacman\simplege\gametest\gameobject.h(109): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+         myObject.cpp
+     1>c:\users\jiadong\desktop\游戏开发\pacman\simplege\gametest\gameobject.h(109): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+         myLevel.cpp
+     1>c:\users\jiadong\desktop\游戏开发\pacman\simplege\gametest\gameobject.h(109): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+         myAbility.cpp
+     1>c:\users\jiadong\desktop\游戏开发\pacman\simplege\gametest\gameobject.h(109): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+         Level.cpp
+     1>c:\users\jiadong\desktop\游戏开发\pacman\simplege\gametest\gameobject.h(109): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+         GameTest.cpp
+     1>c:\users\jiadong\desktop\游戏开发\pacman\simplege\gametest\gameobject.h(109): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+         GameObject.cpp
+     1>c:\users\jiadong\desktop\游戏开发\pacman\simplege\gametest\gameobject.h(109): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+         Animation.cpp
+     1>c:\users\jiadong\desktop\游戏开发\pacman\simplege\gametest\gameobject.h(109): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+     1>c:\users\jiadong\desktop\游戏开发\pacman\simplege\gametest\animation.cpp(36): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+         Ability.cpp
+         正在生成代码...
+       Link:
+         D:\Applications\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\jiadong\Desktop\游戏开发\PacMan\SimpleGE\x64\Debug\GameTest.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\jiadong\Desktop\游戏开发\PacMan\SimpleGE\x64\Debug\GameTest.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\jiadong\Desktop\游戏开发\PacMan\SimpleGE\x64\Debug\GameTest.lib" /MACHINE:X64 x64\Debug\Ability.obj
+         x64\Debug\Animation.obj
+         x64\Debug\GameObject.obj
+         x64\Debug\GameTest.obj
+         x64\Debug\Level.obj
+         x64\Debug\myAbility.obj
+         x64\Debug\myLevel.obj
+         x64\Debug\myObject.obj
+         x64\Debug\SystemController.obj
+         Alpha_Engine.lib
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEVec2Set，该符号在函数 "public: virtual void __cdecl GameObject::update(void)" (?update@GameObject@@UEAAXXZ) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEMtx33Concat，该符号在函数 "public: virtual void __cdecl GameObject::update(void)" (?update@GameObject@@UEAAXXZ) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEMtx33Trans，该符号在函数 "public: virtual void __cdecl GameObject::update(void)" (?update@GameObject@@UEAAXXZ) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEMtx33Scale，该符号在函数 "public: virtual void __cdecl GameObject::update(void)" (?update@GameObject@@UEAAXXZ) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEMtx33Rot，该符号在函数 "public: virtual void __cdecl GameObject::update(void)" (?update@GameObject@@UEAAXXZ) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEFrameRateControllerGetFrameTime，该符号在函数 "public: virtual void __cdecl GameObject::update(void)" (?update@GameObject@@UEAAXXZ) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxSetRenderMode，该符号在函数 "public: virtual void __cdecl GameObject::draw(void)" (?draw@GameObject@@UEAAXXZ) 中被引用
+     1>SystemController.obj : error LNK2001: 无法解析的外部符号 __imp_AEGfxSetRenderMode
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxSetTransform，该符号在函数 "public: virtual void __cdecl GameObject::draw(void)" (?draw@GameObject@@UEAAXXZ) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxSetBlendMode，该符号在函数 "public: virtual void __cdecl GameObject::draw(void)" (?draw@GameObject@@UEAAXXZ) 中被引用
+     1>SystemController.obj : error LNK2001: 无法解析的外部符号 __imp_AEGfxSetBlendMode
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxMeshStart，该符号在函数 "public: virtual bool __cdecl GameObject::init(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?init@GameObject@@UEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxTriAdd，该符号在函数 "public: virtual bool __cdecl GameObject::init(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?init@GameObject@@UEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxMeshEnd，该符号在函数 "public: virtual bool __cdecl GameObject::init(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?init@GameObject@@UEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxMeshDraw，该符号在函数 "public: virtual void __cdecl GameObject::draw(void)" (?draw@GameObject@@UEAAXXZ) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxMeshFree，该符号在函数 "public: void __cdecl GameObject::setMesh(struct AEGfxVertexList *)" (?setMesh@GameObject@@QEAAXPEAUAEGfxVertexList@@@Z) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxTextureLoad，该符号在函数 "public: virtual bool __cdecl GameObject::init(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?init@GameObject@@UEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 中被引用
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxTextureSet，该符号在函数 "public: virtual void __cdecl GameObject::draw(void)" (?draw@GameObject@@UEAAXXZ) 中被引用
+     1>SystemController.obj : error LNK2001: 无法解析的外部符号 __imp_AEGfxTextureSet
+     1>GameObject.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxSetTextureMode，该符号在函数 "public: virtual void __cdecl GameObject::draw(void)" (?draw@GameObject@@UEAAXXZ) 中被引用
+     1>SystemController.obj : error LNK2001: 无法解析的外部符号 __imp_AEGfxSetTextureMode
+     1>GameTest.obj : error LNK2019: 无法解析的外部符号 __imp_AESysFrameStart，该符号在函数 WinMain 中被引用
+     1>GameTest.obj : error LNK2019: 无法解析的外部符号 __imp_AESysFrameEnd，该符号在函数 WinMain 中被引用
+     1>GameTest.obj : error LNK2019: 无法解析的外部符号 __imp_AEInputUpdate，该符号在函数 WinMain 中被引用
+     1>myAbility.obj : error LNK2019: 无法解析的外部符号 __imp_AEInputCheckCurr，该符号在函数 "public: virtual void __cdecl PlayerAI::update(void)" (?update@PlayerAI@@UEAAXXZ) 中被引用
+     1>SystemController.obj : error LNK2019: 无法解析的外部符号 __imp_AESysInit，该符号在函数 "public: int __cdecl SystemController::init(struct HINSTANCE__ *,int)" (?init@SystemController@@QEAAHPEAUHINSTANCE__@@H@Z) 中被引用
+     1>SystemController.obj : error LNK2019: 无法解析的外部符号 __imp_AESysReset，该符号在函数 "public: int __cdecl SystemController::init(struct HINSTANCE__ *,int)" (?init@SystemController@@QEAAHPEAUHINSTANCE__@@H@Z) 中被引用
+     1>SystemController.obj : error LNK2019: 无法解析的外部符号 __imp_AESysExit，该符号在函数 "public: void __cdecl SystemController::exit(void)" (?exit@SystemController@@QEAAXXZ) 中被引用
+     1>SystemController.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxSetBackgroundColor，该符号在函数 "public: void __cdecl SystemController::draw(void)" (?draw@SystemController@@QEAAXXZ) 中被引用
+     1>SystemController.obj : error LNK2019: 无法解析的外部符号 __imp_AEGfxSetTintColor，该符号在函数 "public: void __cdecl SystemController::draw(void)" (?draw@SystemController@@QEAAXXZ) 中被引用
+     1>Alpha_Engine.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+     1>C:\Users\jiadong\Desktop\游戏开发\PacMan\SimpleGE\x64\Debug\GameTest.exe : fatal error LNK1120: 26 个无法解析的外部命令
+     1>已完成生成项目“C:\Users\jiadong\Desktop\游戏开发\PacMan\SimpleGE\GameTest\GameTest.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:13.48

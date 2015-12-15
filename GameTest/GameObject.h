@@ -1,0 +1,113 @@
+#pragma once
+
+#include <vector>
+
+#include "AEEngine.h"
+#include "Macros.h"
+#include "SystemController.h"
+#include "Ability.h"
+
+using std::vector;
+
+class GameObject {
+private:
+    bool isActive; // 若处于非活动状态则关闭update
+    bool isVisible; // 若不可见则关闭draw
+    AEGfxVertexList*	pMesh; // 形状
+    float size; // 大小
+    bool isPosInit;
+    AEVec2 posRelative;	 // 相对位置
+    AEVec2 posGlobal; // 全局位置
+    AEVec2 velCurr;	// 当前速度
+    float dirCurr;	// 当前方向
+    AEMtx33 transform;	// 变换矩阵：每一帧都需要为每一个对象计算
+    AEGfxTexture* texture; // GameObject 的纹理
+
+    GameObject* parent; // 当前节点的parent
+    vector<GameObject*> children; // 当前节点的children
+
+    vector<Ability*> abilities; // GameObject's extra ability
+public:
+    GameObject();
+    ~GameObject();
+
+    CREATE_FUNC(GameObject);
+    CREATE_FUNC_WITH_STR(GameObject);
+
+    // active
+    void setActive(bool ac) { isActive = ac; }
+    bool getActive() { return isActive; }
+    // visible
+    void setVisible(bool vi) { isVisible = vi; }
+    bool getVisible() { return isVisible; }
+    // getter & setter
+    void setSize(float s) { size = s; }
+    float getSize() { return size; }
+
+    // position in relative
+    void setPosition(AEVec2 pos) { posRelative = pos; posGlobal = convertToGlobalPosition(this, posRelative); }
+    void setPosition(float x, float y) { posRelative.x = x; posRelative.y = y; posGlobal = convertToGlobalPosition(this, posRelative); }
+    void setPositionX(float x) { posRelative.x = x; posGlobal = convertToGlobalPosition(this, posRelative); }
+    void setPositionY(float y) { posRelative.y = y; posGlobal = convertToGlobalPosition(this, posRelative); }
+    AEVec2 getPosition() { return posRelative; }
+    float getPositionX() { return posRelative.x; }
+    float getPositionY() { return posRelative.y; }
+    // position in global
+    void setRealPosition(float x, float y) { posGlobal.x = x; posGlobal.y = y; }
+    void setRealPosition(AEVec2 pos) { posGlobal = pos; }
+    AEVec2 getRealPosition() { return posGlobal; }
+    // 坐标转化
+    AEVec2 convertToGlobalPosition(GameObject *go, AEVec2 &pos) {
+        auto parent = go->getParent();
+        if (parent) {
+            AEVec2 pos = convertToGlobalPosition(parent, parent->getPosition());
+            pos.x += go->getPositionX();
+            pos.y += go->getPositionY();
+            return pos;
+        }
+        return go->getPosition();
+    }
+    AEVec2 convertToRelativePosition(GameObject *go, AEVec2 &pos) {
+        // TODO
+    }
+
+    void setVelocity(AEVec2 vel) { velCurr = vel; }
+    void setVelocity(float x, float y) { velCurr.x = x; velCurr.y = y; }
+    AEVec2 getVelocity() { return velCurr; }
+
+    void setDirection(float dir) { dirCurr = dir; }
+    float getDirection() { return dirCurr; }
+
+    void setMesh(AEGfxVertexList* mesh) {
+        if (pMesh) {
+            AEGfxMeshFree(pMesh);
+        }
+        pMesh = mesh;
+    }
+    AEGfxVertexList* getMesh() { return pMesh; }
+
+    void setTransformMatrix(AEMtx33 trans) { transform = trans; }
+    AEMtx33* getTransformMatrix() { return &transform; }
+
+    void setTexture(AEGfxTexture *tex) { texture = tex; }
+
+    // virtual functions
+    virtual bool init();
+    virtual bool init(const std::string &textureName);
+    virtual void update();
+    virtual void draw();
+    virtual void destroy();
+
+    // GameObject tree
+    void setParent(GameObject* parent);
+    GameObject* getParent();
+    void addChild(GameObject* child);
+    void removeChild(GameObject* child);
+    vector<GameObject*>& getChildren();
+
+    // abilities
+    int getAbilityCount() { return abilities.size(); }
+    void addAbility(Ability* ab);
+    void removeAbility(const std::string& name);
+    const vector<Ability*>& getAbilities() { return abilities; }
+};
