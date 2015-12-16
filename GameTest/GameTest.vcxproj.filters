@@ -105,6 +105,9 @@
     <ClInclude Include="Stack.h">
       <Filter>Header Files\SimpleGE</Filter>
     </ClInclude>
+    <ClInclude Include="CreatePath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
@@ -142,6 +145,9 @@
       <Filter>Source Files\SimpleGE</Filter>
     </ClCompile>
     <ClCompile Include="MonsterAI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CreatePath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

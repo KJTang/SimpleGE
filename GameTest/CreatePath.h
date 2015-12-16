@@ -16,11 +16,8 @@ typedef struct {
 }SElemType;
 
 /*地图类型定义*/
-typedef struct {
-	PosType *seat;
-}MapType;
+typedef int MapType;
 
-/*生成怪物行走的路径*/
-bool MonsterPath(MapType map,PosType start,PosType end) {
-
-}
+bool MonsterPath(MapType (*map)[4], PosType start, PosType end,Stack<PosType> &path);
+bool Pass(MapType(*map)[4], PosType curpos);
+PosType NextPos(PosType seat, int di);
