@@ -34,16 +34,16 @@ bool MonsterAI::init(GameObject* owner) {
 	this->map[2][3] = 1;
 	this->map[3][0] = 1;
 	this->map[3][1] = 1;
-	this->map[3][2] = 0;
+	this->map[3][2] = 1;
 	this->map[3][3] = 1;
-	this->map[4][0] = 1;
-	this->map[4][1] = 0;
-	this->map[4][2] = 0;
-	this->map[4][3] = 1;
-	this->map[5][0] = 1;
-	this->map[5][1] = 1;
-	this->map[5][2] = 1;
-	this->map[5][3] = 1;
+	//this->map[4][0] = 1;
+	//this->map[4][1] = 0;
+	//this->map[4][2] = 0;
+	//this->map[4][3] = 1;
+	//this->map[5][0] = 1;
+	//this->map[5][1] = 1;
+	//this->map[5][2] = 1;
+	//this->map[5][3] = 1;
 
 	this->curpos = { 1,1 };
 	this->end = { 4,1 };
@@ -56,7 +56,7 @@ void MonsterAI::update() {
 	auto owner = this->getOwner();
 	if ((this->count % 200) == 0) {
 		this->start = this->curpos;
-		this->end = { 4,1 };
+		this->end = { 2,2 };
 		MonsterPath(this->map, this->start, this->end, this->path);
 		if (!this->path.Empty()) {
 			this->path.Pop(this->nextpos);

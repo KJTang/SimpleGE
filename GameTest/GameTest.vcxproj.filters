@@ -108,6 +108,9 @@
     <ClInclude Include="CreatePath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MapController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
@@ -148,6 +151,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CreatePath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MapController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -74,6 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>严重性	代码	说明	项目	文件	行;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -138,6 +139,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Macros.h" />
+    <ClInclude Include="MapController.h" />
     <ClInclude Include="MonsterAI.h" />
     <ClInclude Include="CreatePath.h" />
     <ClInclude Include="myAbility.h" />
@@ -161,6 +163,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTest.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="MapController.cpp" />
     <ClCompile Include="MonsterAI.cpp" />
     <ClCompile Include="myAbility.cpp" />
     <ClCompile Include="myLevel.cpp" />
