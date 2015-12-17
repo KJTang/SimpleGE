@@ -2,6 +2,7 @@
 #include "myObject.h"
 #include "myAbility.h"
 #include "MonsterAI.h"
+#include "MapController.h"
 
 /********************
 Level One
@@ -15,16 +16,34 @@ bool LevelOne::init() {
     }
     count = 0;
 
-    go = GameObject::create("test.png");
-    this->addChild(go);
-    //go->setPosition(-100, 0);
-    go->setSize(20);
-    //go->setActive(false);
-    //go->setVisible(false);
-    //go->setVelocity(30, 0);
-	//go->addAbility(PlayerAI::create(go));
+	/********************
+	DPW
+	*******************/
+	auto layer = GameObject::create();
+	this->addChild(layer);
+	MapController::getInstance()->createMapFromFile("wdp.txt", layer);
+	auto test = GameObject::create("test.png");
+	this->addChild(test);
+	test->addAbility(PlayerAI::create(test));
+	test->setPosition(0, 0);
+	test->setSize(10);
+	int flag = MapController::getInstance()->getObjectType(test);
+	if (flag)
+		GameLog("collision");
+
+	/********************
+	LJD
+	*******************/
+	go = GameObject::create("test.png");
+	this->addChild(go);
+	go->setPosition(-100, 0);
+	go->setSize(10);
 	go->addAbility(MonsterAI::create(go));
 
+
+	/********************
+	TKJ
+	*******************/
     auto ani = Animation::create();
     this->addChild(ani);
     ani->addFrame("animation01.png");
