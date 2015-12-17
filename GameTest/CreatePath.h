@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Stack.h"
+#define MAP_ROW 20 //数组行数
+#define MAP_LOW 40 //数组列数
 
 /*坐标类型定义*/
 typedef struct {
@@ -15,9 +17,6 @@ typedef struct {
 	int di;			//从此结点走向下一结点的“方向”
 }SElemType;
 
-/*地图类型定义*/
-typedef int MapType;
-
-bool MonsterPath(MapType (*map)[4], PosType start, PosType end,Stack<PosType> &path);
-bool Pass(MapType(*map)[4], PosType curpos);
+bool MonsterPath(int (*map)[MAP_LOW], PosType start, PosType end,Stack<PosType> &path);
+bool Pass(int (*map)[MAP_LOW], PosType curpos);
 PosType NextPos(PosType seat, int di);

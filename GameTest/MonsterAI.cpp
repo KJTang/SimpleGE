@@ -1,4 +1,5 @@
 #include "MonsterAI.h"
+#include "CreatePath.h"
 
 /**************
 MonsterAI
@@ -20,54 +21,40 @@ bool MonsterAI::init(GameObject* owner) {
 	this->getOwner()->setVelocity(0, 0);
 
 	//初始化地图信息
-	this->map[0][0] = 1;
-	this->map[0][1] = 1;
-	this->map[0][2] = 1;
-	this->map[0][3] = 1;
-	this->map[1][0] = 1;
-	this->map[1][1] = 0;
-	this->map[1][2] = 0;
-	this->map[1][3] = 1;
-	this->map[2][0] = 1;
-	this->map[2][1] = 1;
-	this->map[2][2] = 0;
-	this->map[2][3] = 1;
-	this->map[3][0] = 1;
-	this->map[3][1] = 1;
-	this->map[3][2] = 1;
-	this->map[3][3] = 1;
-	//this->map[4][0] = 1;
-	//this->map[4][1] = 0;
-	//this->map[4][2] = 0;
-	//this->map[4][3] = 1;
-	//this->map[5][0] = 1;
-	//this->map[5][1] = 1;
-	//this->map[5][2] = 1;
-	//this->map[5][3] = 1;
+	this->setMapInfo(MapController::getInstance()->mapInfo);
 
+	owner->setPositionX(MapController::getInstance()->getXPositionInWorld(1));
+	owner->setPositionY(MapController::getInstance()->getYPositionInWorld(1));
+	owner->setSize(10);
 	this->curpos = { 1,1 };
-	this->end = { 4,1 };
-	this->path.Init();
+	this->nextpos = { 1,1 };
+	this->end = { 10,20 };
+	this->flag = 0;
+	this->randtime = (rand() % 10 + 1)*1000;
 
 	return true;
 }
 
 void MonsterAI::update() {
 	auto owner = this->getOwner();
-	if ((this->count % 200) == 0) {
-		this->start = this->curpos;
-		this->end = { 2,2 };
+	if ((this->count % this->randtime) == 0) {
+		this->randtime = (rand() % 10 + 1) * 1000;
+		PosType e;
+		this->start = this->nextpos;
+		while (!this->path.Empty()) {
+			this->path.Pop(e);
+		}
+		this->setMapInfo(MapController::getInstance()->mapInfo);
 		MonsterPath(this->map, this->start, this->end, this->path);
 		if (!this->path.Empty()) {
 			this->path.Pop(this->nextpos);
 		}
 	}
-	if ((this->count % 40) == 0) {
+	if ((this->count % 20) == 0) {
+		this->flag = 0;
 		this->curpos = this->nextpos;
 		if (!this->path.Empty()) {
 			this->path.Pop(this->nextpos);
-			printf("%d,%d\n", this->curpos.posX, this->curpos.posY);
-			printf("%d,%d\n", this->nextpos.posX, this->nextpos.posY);
 		}
 	}
 	MoveByPath();
@@ -92,10 +79,18 @@ void MonsterAI::MoveByPath() {
 	//垂直移动
 	else if (this->curpos.posY == this->nextpos.posY) {
 		if (this->curpos.posX < this->nextpos.posX) {
-			owner->setPositionY(owner->getPositionY() - 1);		//向上运动
+			owner->setPositionY(owner->getPositionY() - 1);		//向下运动
 		}
 		else {
-			owner->setPositionY(owner->getPositionY() + 1);		//向下运动
+			owner->setPositionY(owner->getPositionY() + 1);		//向上运动
+		}
+	}
+}
+
+void MonsterAI::setMapInfo(int (*map)[40]) {
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 40; j++) {
+			this->map[i][j] = map[i][j];
 		}
 	}
 }

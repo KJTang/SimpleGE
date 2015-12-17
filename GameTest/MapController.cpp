@@ -1,4 +1,4 @@
-#include "MapController.h"
+#include "SimpleGE.h"
 
 MapController* MapController::sharedController = nullptr;
 
@@ -65,4 +65,19 @@ int MapController::getObjectType(GameObject *owner)
 {
 	return mapInfo[(int)(owner->getPositionX() - 0.5)][(int)(owner->getPositionY() - 0.5)];
 }
+
+/***********
+*JDL
+***********/
+
+/*地图中的X坐标转化为真实X坐标*/
+float MapController::getXPositionInWorld(int mapPosX) {
+	return (float)((mapPosX - 40 / 2) * 20.0);
+}
+
+/*地图中的Y坐标转化为真实X坐标*/
+float MapController::getYPositionInWorld(int mapPosY) {
+	return (float)((mapPosY - 20 / 2) * -20.0);
+}
+
 

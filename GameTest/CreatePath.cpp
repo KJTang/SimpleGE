@@ -5,7 +5,7 @@ Create Monster Path
 ******************/
 
 /*根据地图生成从起点到终点的通路*/
-bool MonsterPath(MapType (*map)[4], PosType start, PosType end,Stack<PosType> &path) {
+bool MonsterPath(int (*map)[MAP_LOW], PosType start, PosType end,Stack<PosType> &path) {
 	Stack<SElemType> S;
 	SElemType e;
 	PosType curpos;
@@ -17,7 +17,7 @@ bool MonsterPath(MapType (*map)[4], PosType start, PosType end,Stack<PosType> &p
 
 	do {
 		if (Pass(map,curpos)) {
-			map[curpos.posX][curpos.posY] = 2;	      //将加入通路的地图坐标标志为不可通
+			map[curpos.posX][curpos.posY] = -1;	      //将加入通路的地图坐标标志为不可通
 			e = { curstep,curpos,1 };
 			//printf("%d,%d\n", e.seat.posX, e.seat.posY);
 			S.Push(e);
@@ -60,7 +60,7 @@ bool MonsterPath(MapType (*map)[4], PosType start, PosType end,Stack<PosType> &p
 }
 
 /*判断当前路径结点是否可通*/
-bool Pass(MapType(*map)[4], PosType curpos) {
+bool Pass(int(*map)[MAP_LOW], PosType curpos) {
 	if (map[curpos.posX][curpos.posY] == 0) {
 		return true;
 	}
@@ -72,16 +72,16 @@ bool Pass(MapType(*map)[4], PosType curpos) {
 /*根据当前方向移动到下一步*/
 PosType NextPos(PosType seat, int di) {
 	switch (di) {
-	case 1:			//向左移动一步
+	case 1:			//向下移动一步
 		seat = { seat.posX + 1,seat.posY };
 		break;
-	case 2:			//向下移动一步
+	case 2:			//向右移动一步
 		seat = { seat.posX,seat.posY + 1 };
 		break;
-	case 3:			//向右移动一步
+	case 3:			//向上移动一步
 		seat = { seat.posX - 1,seat.posY };
 		break;
-	case 4:			//向上移动一步
+	case 4:			//向左移动一步
 		seat = { seat.posX,seat.posY - 1 };
 		break;
 	}

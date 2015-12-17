@@ -37,8 +37,7 @@ public:
 	/*Ïú»ÙÕ»*/
 	bool Destroy() {
 		if (base) {
-			base = NULL;
-			top = NULL;
+			base = top = NULL;
 			stackSize = 0;
 		}
 		return true;

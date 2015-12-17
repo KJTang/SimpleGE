@@ -2,13 +2,13 @@
 
 #include "SimpleGE.h"
 
-class PlayerAI : public Ability {
+class PlayerControl : public Ability {
 private:
 public:
-    PlayerAI();
-    ~PlayerAI();
+    PlayerControl();
+    ~PlayerControl();
 
-    static PlayerAI* create(GameObject* owner);
+    static PlayerControl* create(GameObject* owner);
     virtual bool init(GameObject* owner);
     virtual void update();
 };

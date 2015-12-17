@@ -5,11 +5,12 @@
 #define MAP_ROW 20 //数组行数
 #define MAP_LOW 40 //数组列数
 
+
 class MapController {
 private:
 	static MapController *sharedController;
-	int mapInfo[MAP_ROW][MAP_LOW];
 public:
+	int mapInfo[MAP_ROW][MAP_LOW];
 	MapController();
 	~MapController();
 
@@ -26,4 +27,14 @@ public:
 	int getYPositionInMap(float realPosY); // 将真实Y坐标转换为地图中的Y坐标
 
 	int getObjectType(GameObject *owner);//判断位置的Object的类型
+
+	/***********
+	*JDL
+	***********/
+
+	/*地图中的X坐标转化为真实X坐标*/
+	float getXPositionInWorld(int mapPosX);
+
+	/*地图中的Y坐标转化为真实X坐标*/
+	float getYPositionInWorld(int mapPosY);
 };

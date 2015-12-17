@@ -17,6 +17,18 @@ bool LevelOne::init() {
     count = 0;
 
 	/********************
+	TKJ
+	*******************/
+	//auto ani = Animation::create();
+	//this->addChild(ani);
+	//ani->addFrame("animation01.png");
+	//ani->addFrame("animation02.png");
+	//ani->addFrame("animation03.png");
+	//ani->start(0.5, -1);
+	//ani->setSize(20);
+	//ani->setPosition(100, 100);
+
+	/********************
 	DPW
 	*******************/
 	auto layer = GameObject::create();
@@ -24,7 +36,7 @@ bool LevelOne::init() {
 	MapController::getInstance()->createMapFromFile("wdp.txt", layer);
 	auto test = GameObject::create("test.png");
 	this->addChild(test);
-	test->addAbility(PlayerAI::create(test));
+	test->addAbility(PlayerControl::create(test));
 	test->setPosition(0, 0);
 	test->setSize(10);
 	int flag = MapController::getInstance()->getObjectType(test);
@@ -36,29 +48,14 @@ bool LevelOne::init() {
 	*******************/
 	go = GameObject::create("test.png");
 	this->addChild(go);
-	go->setPosition(-100, 0);
-	go->setSize(10);
 	go->addAbility(MonsterAI::create(go));
-
-
-	/********************
-	TKJ
-	*******************/
-    auto ani = Animation::create();
-    this->addChild(ani);
-    ani->addFrame("animation01.png");
-    ani->addFrame("animation02.png");
-    ani->addFrame("animation03.png");
-    ani->start(0.5, -1);
-    ani->setSize(20);
-    ani->setPosition(100, 100);
 
     return true;
 }
 
 void LevelOne::update() {
     Level::update();
-    if (count >= 300) {
+    if (count >= CONST_FPS * 600) {
         GameLog("LevelChange: LevelOne to LevelTwo");
         SystemController::getInstance()->setNextLevel(LevelTwo::create());
     }

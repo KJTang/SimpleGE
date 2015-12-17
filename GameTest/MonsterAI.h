@@ -1,14 +1,16 @@
 #pragma once
 
 #include "SimpleGE.h"
+#include "CreatePath.h"
 
 
 class MonsterAI : public Ability {
 private:
-	int count;
+	int count,randtime;
 	PosType curpos, nextpos,start,end;
-	MapType map[6][4];
+	int map[MAP_ROW][MAP_LOW];
 	Stack<PosType> path;
+	int flag;
 public:
 	MonsterAI();
 	~MonsterAI();
@@ -17,4 +19,5 @@ public:
 	virtual bool init(GameObject* owner);
 	virtual void update();
 	void MoveByPath();
+	void setMapInfo(int (*map)[40]);
 };
