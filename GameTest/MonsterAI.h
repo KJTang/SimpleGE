@@ -7,9 +7,9 @@
 class MonsterAI : public Ability {
 private:
 	int count,randtime;
-	PosType curpos, nextpos,start,end;
+	MPosType curPos, nextPos,start,end;
 	int map[MAP_ROW][MAP_LOW];
-	Stack<PosType> path;
+	Stack<MPosType> path;
 	int flag;
 public:
 	MonsterAI();

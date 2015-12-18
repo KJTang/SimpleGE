@@ -26,8 +26,8 @@ bool MonsterAI::init(GameObject* owner) {
 	owner->setPositionX(MapController::getInstance()->getXPositionInWorld(1));
 	owner->setPositionY(MapController::getInstance()->getYPositionInWorld(1));
 	owner->setSize(10);
-	this->curpos = { 1,1 };
-	this->nextpos = { 1,1 };
+	this->curPos = { 1,1 };
+	this->nextPos = { 1,1 };
 	this->end = { 10,20 };
 	this->flag = 0;
 	this->randtime = (rand() % 10 + 1)*1000;
@@ -39,22 +39,22 @@ void MonsterAI::update() {
 	auto owner = this->getOwner();
 	if ((this->count % this->randtime) == 0) {
 		this->randtime = (rand() % 10 + 1) * 1000;
-		PosType e;
-		this->start = this->nextpos;
+		MPosType e;
+		this->start = this->nextPos;
 		while (!this->path.Empty()) {
 			this->path.Pop(e);
 		}
 		this->setMapInfo(MapController::getInstance()->mapInfo);
-		PathGenerator::getInstance()->DFSPath(this->map, this->start, this->end, this->path);
+		PathGenerator::getInstance()->WFSPath(this->map, this->start, this->end, this->path);
 		if (!this->path.Empty()) {
-			this->path.Pop(this->nextpos);
+			this->path.Pop(this->nextPos);
 		}
 	}
 	if ((this->count % 20) == 0) {
 		this->flag = 0;
-		this->curpos = this->nextpos;
+		this->curPos = this->nextPos;
 		if (!this->path.Empty()) {
-			this->path.Pop(this->nextpos);
+			this->path.Pop(this->nextPos);
 		}
 	}
 	MoveByPath();
@@ -64,12 +64,12 @@ void MonsterAI::update() {
 void MonsterAI::MoveByPath() {
 	auto owner = this->getOwner();
 	//到达终点
-	if (this->curpos.posX == this->nextpos.posX&&this->curpos.posY == this->nextpos.posY) {
+	if (this->curPos.posX == this->nextPos.posX&&this->curPos.posY == this->nextPos.posY) {
 		return;
 	}
 	//水平移动
-	else if (this->curpos.posX == this->nextpos.posX) {
-		if (this->curpos.posY < this->nextpos.posY) {
+	else if (this->curPos.posX == this->nextPos.posX) {
+		if (this->curPos.posY < this->nextPos.posY) {
 			owner->setPositionX(owner->getPositionX() + 1);		//向右运动
 		}
 		else {
@@ -77,8 +77,8 @@ void MonsterAI::MoveByPath() {
 		}
 	}
 	//垂直移动
-	else if (this->curpos.posY == this->nextpos.posY) {
-		if (this->curpos.posX < this->nextpos.posX) {
+	else if (this->curPos.posY == this->nextPos.posY) {
+		if (this->curPos.posX < this->nextPos.posX) {
 			owner->setPositionY(owner->getPositionY() - 1);		//向下运动
 		}
 		else {

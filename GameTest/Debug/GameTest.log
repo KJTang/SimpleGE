@@ -1,4 +1,4 @@
-﻿生成启动时间为 2015/12/18 13:03:43。
+﻿生成启动时间为 2015/12/18 22:04:07。
      1>项目“C:\Users\jiadong\Desktop\游戏开发\PacMan\GameTest\GameTest.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          D:\Applications\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D "严重性	代码	说明	项目	文件	行" /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt MonsterAI.cpp
@@ -22,4 +22,4 @@
 
 已成功生成。
 
-已用时间 00:00:01.82
+已用时间 00:00:01.35

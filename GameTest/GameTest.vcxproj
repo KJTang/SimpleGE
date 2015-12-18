@@ -145,6 +145,7 @@
     <ClInclude Include="myAbility.h" />
     <ClInclude Include="myLevel.h" />
     <ClInclude Include="myObject.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="SimpleGE.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="SystemController.h" />

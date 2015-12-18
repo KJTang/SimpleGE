@@ -9,3 +9,5 @@
 #include "Animation.h"
 #include "PathGenerator.h"
 #include "MapController.h"
+#include "Stack.h"
+#include "Queue.h"

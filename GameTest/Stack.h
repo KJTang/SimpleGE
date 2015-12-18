@@ -1,7 +1,7 @@
-/* Project:		Stack On Linear Structure
+/* Project:		PacMan
 File Name:		Stack.h
 Author:			林嘉栋
-Date:			2015/11/30
+Date:			2015/12/11
 Purpose:		ADT Stack的数据对象，数据关系，和基本操作的声明*/
 
 #ifndef _Stack
@@ -21,26 +21,13 @@ private:
 	int stackSize;
 public:
 	Stack() {
-		base = top = NULL;
-		stackSize = 0;
-	}
-
-	/*初始栈*/
-	bool Init() {
 		base = (T *)malloc(STACK_INIT_SIZE * sizeof(T));
-		if (!base) return false;			//分配失败，返回ERROR
 		top = base;
 		stackSize = STACK_INIT_SIZE;
-		return true;
 	}
+	
+	~Stack() {
 
-	/*销毁栈*/
-	bool Destroy() {
-		if (base) {
-			base = top = NULL;
-			stackSize = 0;
-		}
-		return true;
 	}
 
 	/*清空栈*/

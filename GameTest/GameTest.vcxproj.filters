@@ -111,6 +111,9 @@
     <ClInclude Include="PathGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>Header Files\SimpleGE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
