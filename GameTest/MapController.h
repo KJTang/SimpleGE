@@ -37,4 +37,16 @@ public:
 
 	/*地图中的Y坐标转化为真实X坐标*/
 	float getYPositionInWorld(int mapPosY);
+
+	/*随机生成一个空的世界坐标*/
+	WPosType MapController::RndEmptyPositionInWorld();
+
+	/*随机生成一个空的世界坐标*/
+	MPosType MapController::RndEmptyPositionInMap();
+
+	/*将地图坐标转换为世界坐标*/
+	WPosType MapController::ChangeWorldPosToMapPos(MPosType mPos);
+
+	/*将世界坐标转换为地图坐标*/
+	MPosType MapController::ChangeWorldPosToMapPos(WPosType wPos);
 };

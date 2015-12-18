@@ -28,7 +28,10 @@ bool MonsterAI::init(GameObject* owner) {
 	owner->setSize(10);
 	this->curPos = { 1,1 };
 	this->nextPos = { 1,1 };
-	this->end = { 10,20 };
+	this->end.posX = MapController::getInstance()->RndEmptyPositionInMap().posX;
+	this->end.posY = MapController::getInstance()->RndEmptyPositionInMap().posY;
+	//printf("%d,%d", this->end.posX, this->end.posY);
+	//this->end = { 10,20 };
 	this->flag = 0;
 	this->randtime = (rand() % 10 + 1)*1000;
 
