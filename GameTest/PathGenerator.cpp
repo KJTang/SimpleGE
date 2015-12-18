@@ -1,11 +1,17 @@
-#include "CreatePath.h"
+#include "SimpleGE.h"
+
+PathGenerator* PathGenerator::sharedGenerator = nullptr;
+
+PathGenerator::PathGenerator() {}
+
+PathGenerator::~PathGenerator() {}
 
 /*****************
 Create Monster Path
 ******************/
 
-/*根据地图生成从起点到终点的通路*/
-bool MonsterPath(int (*map)[MAP_LOW], PosType start, PosType end,Stack<PosType> &path) {
+/*根据深度优先搜索生成路线*/
+bool PathGenerator::DFSPath(int (*map)[MAP_LOW], PosType start, PosType end,Stack<PosType> &path) {
 	Stack<SElemType> S;
 	SElemType e;
 	PosType curpos;
@@ -59,8 +65,8 @@ bool MonsterPath(int (*map)[MAP_LOW], PosType start, PosType end,Stack<PosType> 
 	return false;				  //已经找到开始到终点的通路，返回true
 }
 
-/*判断当前路径结点是否可通*/
-bool Pass(int(*map)[MAP_LOW], PosType curpos) {
+/*判断当前结点是否可通*/
+bool PathGenerator::Pass(int(*map)[MAP_LOW], PosType curpos) {
 	if (map[curpos.posX][curpos.posY] == 0) {
 		return true;
 	}
@@ -69,8 +75,8 @@ bool Pass(int(*map)[MAP_LOW], PosType curpos) {
 	}
 }
 
-/*根据当前方向移动到下一步*/
-PosType NextPos(PosType seat, int di) {
+/*根据当前方向定位到下一个结点*/
+PosType PathGenerator::NextPos(PosType seat, int di) {
 	switch (di) {
 	case 1:			//向下移动一步
 		seat = { seat.posX + 1,seat.posY };

@@ -1,5 +1,5 @@
 #include "MonsterAI.h"
-#include "CreatePath.h"
+#include "PathGenerator.h"
 
 /**************
 MonsterAI
@@ -45,7 +45,7 @@ void MonsterAI::update() {
 			this->path.Pop(e);
 		}
 		this->setMapInfo(MapController::getInstance()->mapInfo);
-		MonsterPath(this->map, this->start, this->end, this->path);
+		PathGenerator::getInstance()->DFSPath(this->map, this->start, this->end, this->path);
 		if (!this->path.Empty()) {
 			this->path.Pop(this->nextpos);
 		}

@@ -105,10 +105,10 @@
     <ClInclude Include="Stack.h">
       <Filter>Header Files\SimpleGE</Filter>
     </ClInclude>
-    <ClInclude Include="CreatePath.h">
+    <ClInclude Include="MapController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MapController.h">
+    <ClInclude Include="PathGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -150,10 +150,10 @@
     <ClCompile Include="MonsterAI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CreatePath.cpp">
+    <ClCompile Include="MapController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MapController.cpp">
+    <ClCompile Include="PathGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

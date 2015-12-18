@@ -141,7 +141,7 @@
     <ClInclude Include="Macros.h" />
     <ClInclude Include="MapController.h" />
     <ClInclude Include="MonsterAI.h" />
-    <ClInclude Include="CreatePath.h" />
+    <ClInclude Include="PathGenerator.h" />
     <ClInclude Include="myAbility.h" />
     <ClInclude Include="myLevel.h" />
     <ClInclude Include="myObject.h" />
@@ -159,7 +159,7 @@
   <ItemGroup>
     <ClCompile Include="Ability.cpp" />
     <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="CreatePath.cpp" />
+    <ClCompile Include="PathGenerator.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTest.cpp" />
     <ClCompile Include="Level.cpp" />

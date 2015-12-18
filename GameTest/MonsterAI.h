@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SimpleGE.h"
-#include "CreatePath.h"
+#include "PathGenerator.h"
 
 
 class MonsterAI : public Ability {

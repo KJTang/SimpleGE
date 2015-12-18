@@ -7,5 +7,5 @@
 #include "Level.h"
 #include "Ability.h"
 #include "Animation.h"
-#include "CreatePath.h"
+#include "PathGenerator.h"
 #include "MapController.h"
