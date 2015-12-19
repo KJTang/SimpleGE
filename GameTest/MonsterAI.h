@@ -6,11 +6,10 @@
 
 class MonsterAI : public Ability {
 private:
-	int count,randtime;
-	MPosType curPos, nextPos,start,end;
+	int count, randtime, flag;
 	int map[MAP_ROW][MAP_LOW];
 	Stack<MPosType> path;
-	int flag;
+	MPosType curPos, nextPos, start, end;
 public:
 	MonsterAI();
 	~MonsterAI();

@@ -34,21 +34,21 @@ bool LevelOne::init() {
 	auto layer = GameObject::create();
 	this->addChild(layer);
 	MapController::getInstance()->createMapFromFile("wdp.txt", layer);
-	auto test = GameObject::create("test.png");
-	this->addChild(test);
-	test->addAbility(PlayerControl::create(test));
-	test->setPosition(0, 0);
-	test->setSize(10);
-	int flag = MapController::getInstance()->getObjectType(test);
+	auto player = GameObject::create("test.png");
+	this->addChild(player);
+	player->addAbility(PlayerControl::create(player));
+	player->setPosition(0, 0);
+	player->setSize(10);
+	int flag = MapController::getInstance()->getObjectType(player);
 	if (flag)
 		GameLog("collision");
 
 	/********************
 	LJD
 	*******************/
-	go = GameObject::create("test.png");
-	this->addChild(go);
-	go->addAbility(MonsterAI::create(go));
+	auto monster = GameObject::create("test.png");
+	this->addChild(monster);
+	monster->addAbility(MonsterAI::create(monster));
 
     return true;
 }

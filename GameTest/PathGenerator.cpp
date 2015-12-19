@@ -32,7 +32,6 @@ bool PathGenerator::DFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, St
 				while (!S.Empty()) {
 					S.Pop(e);
 					curPos = e.seat;
-					printf("%d,%d\n", e.seat.posX,e.seat.posY);
 					path.Push(curPos);
 				}
 				return true;
@@ -40,7 +39,6 @@ bool PathGenerator::DFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, St
 			else {
 				curstep++;
 				curPos = NextPos(e.seat, e.di);
-				//printf("%d,%d\n", curpos.posX, curpos.posY);
 			}
 		}
 		else {
@@ -79,19 +77,28 @@ bool PathGenerator::WFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, St
 	curPos = start;
 
 	curVexs[curPos.posX][curPos.posY] = 1;	
-	map[curPos.posX][curPos.posY] = -1;	      //将加入通路的地图坐标标志为不可通
+	map[curPos.posX][curPos.posY] = 1;
 	for (int i = 0; i < MAP_ROW; i++) {
 		for (int j = 0; j < MAP_LOW; j++) {
 			e.vexs[i][j] = curVexs[i][j];
 		}
 	}
 	e.seat = curPos;
+	Q.EnQueue(e);
 
 	do {
-		if (di <= 4) {
+		if (!Q.Empty()) {
+			Q.DeQueue(e);
+			for (int i = 0; i < MAP_ROW; i++) {
+				for (int j = 0; j < MAP_LOW; j++) {
+					curVexs[i][j] = e.vexs[i][j];
+				}
+			}
+		}
+		for (int di = 1; di <= 4; di++) {
 			curPos = NextPos(e.seat, di);
 			if (Pass(map, curPos)) {
-				map[curPos.posX][curPos.posY] = -1;	      //将加入通路的地图坐标标志为不可通
+				map[curPos.posX][curPos.posY] = 1;
 				curVexs[curPos.posX][curPos.posY] = 1;
 				for (int i = 0; i < MAP_ROW; i++) {
 					for (int j = 0; j < MAP_LOW; j++) {
@@ -105,7 +112,6 @@ bool PathGenerator::WFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, St
 					//将队列Q中的元素依次取出并将坐标入栈到path中，用path返回通路的坐标
 					curPos = end;
 					while (curVexs[curPos.posX][curPos.posY]) {
-						printf("%d,%d\n", curPos.posX, curPos.posY);
 						path.Push(curPos);
 						curVexs[curPos.posX][curPos.posY] = 0;
 						for (int i = 1; i <= 4; i++) {
@@ -120,18 +126,6 @@ bool PathGenerator::WFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, St
 					return true;
 				}
 				curVexs[curPos.posX][curPos.posY] = 0;
-			}
-			di++;
-		}
-		else {
-			if (!Q.Empty()) {
-				Q.DeQueue(e);
-				di = 1;
-				for (int i = 0; i < MAP_ROW; i++) {
-					for (int j = 0; j < MAP_LOW; j++) {
-						curVexs[i][j] = e.vexs[i][j];
-					}
-				}
 			}
 		}
 	} while (!Q.Empty());

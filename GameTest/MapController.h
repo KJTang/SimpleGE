@@ -11,15 +11,19 @@ private:
 	static MapController *sharedController;
 public:
 	int mapInfo[MAP_ROW][MAP_LOW];
+	MPosType rndmPos;
+	WPosType rndwPos;
 	MapController();
 	~MapController();
 
 	static MapController* getInstance() {
 		if (!sharedController) {
 			sharedController = new MapController();
+			sharedController->init();
 		}
 		return sharedController;
 	}
+	bool init();
 	//fopen需要char* 类型，所以我将const string改成了char*__by wdp
 	bool createMapFromFile(char* filename, GameObject* layer); // 从文件读取地图，并加载到layer上
 
@@ -39,10 +43,10 @@ public:
 	float getYPositionInWorld(int mapPosY);
 
 	/*随机生成一个空的世界坐标*/
-	WPosType MapController::RndEmptyPositionInWorld();
+	void MapController::RndCreateEmptyPosInWorld(WPosType &wPos);
 
-	/*随机生成一个空的世界坐标*/
-	MPosType MapController::RndEmptyPositionInMap();
+	/*随机生成一个空的地图坐标*/
+	void MapController::RndCreateEmptyPosInMap(MPosType &mPos);
 
 	/*将地图坐标转换为世界坐标*/
 	WPosType MapController::ChangeWorldPosToMapPos(MPosType mPos);

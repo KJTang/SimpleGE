@@ -7,6 +7,11 @@ MapController::MapController() {}
 
 MapController::~MapController() {}
 
+bool MapController::init() {
+	srand(time(0));
+	return true;
+}
+
 bool MapController::createMapFromFile(char* filename, GameObject* layer)
 {
 	FILE *fp = NULL;
@@ -76,15 +81,13 @@ float MapController::getXPositionInWorld(int mapPosX) {
 	return (float)((mapPosX - 40 / 2) * 20.0);
 }
 
-/*地图中的Y坐标转化为真实X坐标*/
+/*地图中的Y坐标转化为真实Y坐标*/
 float MapController::getYPositionInWorld(int mapPosY) {
 	return (float)((mapPosY - 20 / 2) * -20.0);
 }
 
 /*随机生成一个空的世界坐标*/
-WPosType MapController::RndEmptyPositionInWorld() {
-	WPosType wPos;
-	srand(time(0));
+void MapController::RndCreateEmptyPosInWorld(WPosType &wPos) {
 	int x, y;
 	do {
 		x = rand() % 20;
@@ -93,21 +96,18 @@ WPosType MapController::RndEmptyPositionInWorld() {
 	while (mapInfo[x][y] == 1);
 	wPos.posX = (float)(x - 40 / 2) * 20.0;
 	wPos.posY = (float)(y - 40 / 2) * 20.0;
-	return wPos;
 }
 
-/*随机生成一个空的世界坐标*/
-MPosType MapController::RndEmptyPositionInMap() {
-	MPosType mPos;
-	srand(time(0));
+/*随机生成一个空的地图坐标*/
+void MapController::RndCreateEmptyPosInMap(MPosType &mPos) {
 	int x, y;
 	do {
 		x = rand() % 20;
 		y = rand() % 40;
-	} while (mapInfo[x][y] == 1);
+	}
+	while (mapInfo[x][y] == 1);
 	mPos.posX = x;
 	mPos.posY = y;
-	return mPos;
 }
 
 /*将世界坐标转换为地图坐标*/
@@ -121,8 +121,8 @@ MPosType MapController::ChangeWorldPosToMapPos(WPosType wPos) {
 /*将地图坐标转换为世界坐标*/
 WPosType MapController::ChangeWorldPosToMapPos(MPosType mPos) {
 	WPosType wPos;
-	wPos.posX = (mPos.posX - 40 / 2) * 20.0;
-	wPos.posY = (mPos.posY - 40 / 2) * 20.0;
+	wPos.posX = (float)((mPos.posX - 40 / 2) * 20.0);
+	wPos.posY = (float)((mPos.posY - 20 / 2) * -20.0);
 	return wPos;
 }
 
