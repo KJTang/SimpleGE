@@ -35,6 +35,7 @@ class PathGenerator {
 private:
 	static PathGenerator *sharedGenerator;
 public:
+	int rndDi;
 	PathGenerator();
 	~PathGenerator();
 

@@ -16,6 +16,8 @@ bool PathGenerator::DFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, St
 	DElemType e;
 	MPosType curPos;
 	int curstep;
+	this->rndDi = rand() % 4 ;
+	printf("%d", this->rndDi);
 
 	curPos = start;
 	curstep = 1;
@@ -68,6 +70,7 @@ bool PathGenerator::WFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, St
 	WElemType e,e1;
 	MPosType curPos,nextPos;
 	int di = 1,curVexs[20][40];
+	this->rndDi = 0;
 
 	for (int i = 0; i < MAP_ROW; i++) {
 		for (int j = 0; j < MAP_LOW; j++) {
@@ -145,7 +148,7 @@ bool PathGenerator::Pass(int(*map)[MAP_LOW], MPosType curPos) {
 
 /*根据当前方向定位到下一个结点*/
 MPosType PathGenerator::NextPos(MPosType seat, int di) {
-	switch (di) {
+	switch ((di + this->rndDi)%4 + 1) {
 	case 1:			//向下移动一步
 		seat = { seat.posX + 1,seat.posY };
 		break;

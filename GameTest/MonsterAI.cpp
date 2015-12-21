@@ -24,16 +24,17 @@ bool MonsterAI::init(GameObject* owner) {
 	//初始化地图信息
 	this->setMapInfo(MapController::getInstance()->mapInfo);
 	//随机生成怪物坐标
-	MapController::getInstance()->RndCreateEmptyPosInMap(this->start);
+	this->start = { 10,20 };
 	this->curPos = this->nextPos = this->start;
 	//将怪物加载到地图上
 	owner->setPositionX(MapController::getInstance()->getXPositionInWorld(this->start.posY));
 	owner->setPositionY(MapController::getInstance()->getYPositionInWorld(this->start.posX));
 	owner->setSize(10);
 	//设置player坐标
+	MapController::getInstance()->RndCreateEmptyPosInMap(this->end);
 	//设置刷新路径的时间间隔
 	srand(time(0));
-	this->randtime = (rand() % 10 + 1)*100;
+	this->randtime = (rand() % 20 + 1)*100;
 
 	return true;
 }
@@ -47,16 +48,18 @@ void MonsterAI::update() {
 		while (!this->path.Empty()) {
 			this->path.Pop(e);
 		}
-		MapController::getInstance()->RndCreateEmptyPosInMap(this->end);
-		printf("Updata Path\n");
-		printf("start(%d,%d)\n",start.posX,start.posY);
-		printf("end(%d,%d)\n", end.posX, end.posY);
 		this->setMapInfo(MapController::getInstance()->mapInfo);
-		if ((start.posX - end.posX<=5||start.posX - end.posX>=-5)&& (start.posY - end.posY <= 5 || start.posY - end.posY >= -5)) {
+		if ((start.posX - end.posX<=5&&start.posX - end.posX>=-5)&& (start.posY - end.posY <= 5 && start.posY - end.posY >= -5)) {
 			PathGenerator::getInstance()->WFSPath(this->map, this->start, this->end, this->path);
+			printf("Updata Path By WFS\n");
+			printf("start(%d,%d)\n", start.posX, start.posY);
+			printf("end(%d,%d)\n", end.posX, end.posY);
 		}
 		else {
 			PathGenerator::getInstance()->DFSPath(this->map, this->start, this->end, this->path);
+			printf("Updata Path By DFS\n");
+			printf("start(%d,%d)\n", start.posX, start.posY);
+			printf("end(%d,%d)\n", end.posX, end.posY);
 		}
 		if (!this->path.Empty()) {
 			this->path.Pop(this->nextPos);
