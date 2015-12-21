@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #include "AEEngine.h"
 #include "Macros.h"
@@ -11,6 +12,8 @@ using std::vector;
 
 class GameObject {
 private:
+    std::string _name;
+
     bool isActive; // 若处于非活动状态则关闭update
     bool isVisible; // 若不可见则关闭draw
     AEGfxVertexList*	pMesh; // 形状
@@ -34,6 +37,9 @@ public:
     CREATE_FUNC(GameObject);
     CREATE_FUNC_WITH_STR(GameObject);
 
+    // name
+    void setName(const std::string &name) { _name = name; }
+    std::string getName() { return _name; }
     // active
     void setActive(bool ac) { isActive = ac; }
     bool getActive() { return isActive; }
@@ -102,8 +108,10 @@ public:
     void setParent(GameObject* parent);
     GameObject* getParent();
     void addChild(GameObject* child);
+    void addChild(GameObject* child, const std::string &name);
     void removeChild(GameObject* child);
     vector<GameObject*>& getChildren();
+    GameObject* getChildByName(const std::string &name);
 
     // abilities
     int getAbilityCount() { return abilities.size(); }

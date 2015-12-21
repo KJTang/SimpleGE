@@ -128,6 +128,12 @@ void GameObject::addChild(GameObject* child) {
     child->setParent(this);
 }
 
+void GameObject::addChild(GameObject* child, const std::string &name) {
+    children.push_back(child);
+    child->setParent(this);
+    child->setName(name);
+}
+
 void GameObject::removeChild(GameObject* child) {
     for (auto it = children.begin(); it != children.end(); ++it) {
         if ((*it) == child) {
@@ -143,6 +149,14 @@ vector<GameObject*>& GameObject::getChildren() {
 
 void GameObject::addAbility(Ability* ability) {
     abilities.push_back(ability);
+}
+
+GameObject* GameObject::getChildByName(const std::string &name) {
+    for (auto it = children.begin(); it != children.end(); ++it) {
+        if ((*it)->getName() == name) {
+            return (*it);
+        }
+    }
 }
 
 void GameObject::removeAbility(const std::string& name) {

@@ -99,20 +99,8 @@
     <ClInclude Include="Animation.h">
       <Filter>Header Files\SimpleGE</Filter>
     </ClInclude>
-    <ClInclude Include="MonsterAI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Stack.h">
-      <Filter>Header Files\SimpleGE</Filter>
-    </ClInclude>
     <ClInclude Include="MapController.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PathGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Queue.h">
-      <Filter>Header Files\SimpleGE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -150,13 +138,7 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\SimpleGE</Filter>
     </ClCompile>
-    <ClCompile Include="MonsterAI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MapController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PathGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

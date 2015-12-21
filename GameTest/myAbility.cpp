@@ -3,26 +3,26 @@
 /**************
 PlayerAI
 ***************/
-PlayerControl::PlayerControl() {}
-PlayerControl::~PlayerControl() {}
+PlayerAI::PlayerAI() {}
+PlayerAI::~PlayerAI() {}
 
-PlayerControl* PlayerControl::create(GameObject* owner) {
-    auto pAI = new PlayerControl();
+PlayerAI* PlayerAI::create(GameObject* owner) {
+    auto pAI = new PlayerAI();
     pAI->init(owner);
     return pAI;
 }
 
-bool PlayerControl::init(GameObject* owner) {
+bool PlayerAI::init(GameObject* owner) {
     if (!Ability::init(owner)) {
         return false;
     }
-    this->setName("PlayerControl");
+    this->setName("PlayerAI");
     this->getOwner()->setVelocity(0, 0);
 
     return true;
 }
 
-void PlayerControl::update() {
+void PlayerAI::update() {
     auto owner = this->getOwner();
     if (AEInputCheckCurr(VK_DOWN)) {
         //owner->setPositionY(owner->getPositionY() - 10);
