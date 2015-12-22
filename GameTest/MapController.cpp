@@ -57,13 +57,13 @@ bool MapController::createMapFromFile(char* filename, GameObject* layer)
 
 int MapController::getXPositionInMap(float realPosX) // 将真实X坐标转换为地图中的X坐标
 {
-	return (int)(realPosX / 20);
+	return (int)(realPosX / 20 + 10);
 }
 
 
 int MapController::getYPositionInMap(float realPosY) // 将真实X坐标转换为地图中的X坐标
 {
-	return (int)(realPosY / 20);
+	return (int)(realPosY / (-20) + 20);
 }
 
 //0表示没有东西，1表示墙，2表示豆子，3表示大力丸

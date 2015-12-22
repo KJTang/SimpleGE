@@ -25,6 +25,7 @@ bool MonsterAI::init(GameObject* owner) {
 	this->setMapInfo(MapController::getInstance()->mapInfo);
 	//随机生成怪物坐标
 	this->start = { 10,20 };
+	printf("%d,%d", this->start.posX, this->start.posY);
 	this->curPos = this->nextPos = this->start;
 	//将怪物加载到地图上
 	owner->setPositionX(MapController::getInstance()->getXPositionInWorld(this->start.posY));
