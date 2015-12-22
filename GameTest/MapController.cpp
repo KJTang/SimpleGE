@@ -43,11 +43,11 @@ bool MapController::createMapFromFile(char* filename, GameObject* layer)
 			}
 			else if (mapInfo[i][j] == 0)
 			{
-				auto map_obj = GameObject::create("bean.png");
-				layer->addChild(map_obj);
-				map_obj->setPosition((j - width / 2) * 20.0, (i - length / 2) * -20.0);
-				//map_obj->setActive(false);
-				map_obj->setSize(5);
+				//auto map_obj = GameObject::create("bean.png");
+				//layer->addChild(map_obj);
+				//map_obj->setPosition((j - width / 2) * 20.0, (i - length / 2) * -20.0);
+				////map_obj->setActive(false);
+				//map_obj->setSize(5);
 			}
 		}
 	}

@@ -13,6 +13,7 @@ private:
     float speed;
     void onKeyDown(int dirct);
     std::queue<std::pair<int, Point> > command;
+    int curDirection, nextDirection;
 public:
     PlayerControl();
     ~PlayerControl();
