@@ -7,3 +7,7 @@
 #include "Level.h"
 #include "Ability.h"
 #include "Animation.h"
+#include "PathGenerator.h"
+#include "MapController.h"
+#include "Stack.h"
+#include "Queue.h"

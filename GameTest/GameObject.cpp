@@ -62,7 +62,7 @@ bool GameObject::init(const std::string &textureName) {
 
 void GameObject::update() {
     if (!isPosInit) {
-        this->setRealPosition(convertToGlobalPosition(this, posRelative)); // 先更新当前位置
+        this->setRealPosition(convertToGlobalPosition(this)); // 先更新当前位置
         isPosInit = true;
     }
     // 更新位置

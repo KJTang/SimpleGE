@@ -1,21 +1,30 @@
 #pragma once
 
+#include <queue>
 #include "SimpleGE.h"
 
-class PlayerAI : public Ability {
-private:
-public:
-    PlayerAI();
-    ~PlayerAI();
+struct Point{
+    int x;
+    int y;
+};
 
-    static PlayerAI* create(GameObject* owner);
+class PlayerControl : public Ability {
+private:
+    float speed;
+    void onKeyDown(int dirct);
+    std::queue<std::pair<int, Point> > command;
+public:
+    PlayerControl();
+    ~PlayerControl();
+
+    static PlayerControl* create(GameObject* owner);
     virtual bool init(GameObject* owner);
     virtual void update();
 };
 
 class TestAbility : public Ability {
 private:
-    int count;
+    int count = 0;
 public:
     TestAbility() {}
     ~TestAbility() {}
