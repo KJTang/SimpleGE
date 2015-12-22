@@ -31,6 +31,7 @@ public:
 	int getYPositionInMap(float realPosY); // 将真实Y坐标转换为地图中的Y坐标
 
 	int getObjectType(GameObject *owner);//判断位置的Object的类型
+    int getObjectType(int mapX, int mapY);
 
 	/***********
 	*JDL

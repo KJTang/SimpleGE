@@ -96,7 +96,7 @@ void SystemController::exit(void) {
 
 // log
 void SystemController::log(const string &info) {
-    //cout <<"GameLog: " << info << endl;
+    cout <<"GameLog: " << info << endl;
 }
 
 /***************

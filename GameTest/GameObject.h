@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #include "AEEngine.h"
 #include "Macros.h"
@@ -11,6 +12,8 @@ using std::vector;
 
 class GameObject {
 private:
+    std::string _name;
+
     bool isActive; // 若处于非活动状态则关闭update
     bool isVisible; // 若不可见则关闭draw
     AEGfxVertexList*	pMesh; // 形状
@@ -34,6 +37,9 @@ public:
     CREATE_FUNC(GameObject);
     CREATE_FUNC_WITH_STR(GameObject);
 
+    // name
+    void setName(const std::string &name) { _name = name; }
+    std::string getName() { return _name; }
     // active
     void setActive(bool ac) { isActive = ac; }
     bool getActive() { return isActive; }
@@ -45,10 +51,13 @@ public:
     float getSize() { return size; }
 
     // position in relative
-    void setPosition(AEVec2 pos) { posRelative = pos; posGlobal = convertToGlobalPosition(this, posRelative); }
-    void setPosition(float x, float y) { posRelative.x = x; posRelative.y = y; posGlobal = convertToGlobalPosition(this, posRelative); }
-    void setPositionX(float x) { posRelative.x = x; posGlobal = convertToGlobalPosition(this, posRelative); }
-    void setPositionY(float y) { posRelative.y = y; posGlobal = convertToGlobalPosition(this, posRelative); }
+    void setPosition(AEVec2 pos) { posRelative = pos; posGlobal = convertToGlobalPosition(this); }
+    void setPosition(float x, float y) { posRelative.x = x; posRelative.y = y; posGlobal = convertToGlobalPosition(this); }
+    void setPositionX(float x) { posRelative.x = x; posGlobal = convertToGlobalPosition(this); }
+    void setPositionY(float y) { posRelative.y = y; posGlobal = convertToGlobalPosition(this); }
+    // # ISSUE : getPosition only can get the first set position, when use setVelocity to change GameObject's positon,
+    //                   it cannot get the updated position
+    //                   so currently if want it to return correct value, please use setPosition to change GameObject's position
     AEVec2 getPosition() { return posRelative; }
     float getPositionX() { return posRelative.x; }
     float getPositionY() { return posRelative.y; }
@@ -57,18 +66,18 @@ public:
     void setRealPosition(AEVec2 pos) { posGlobal = pos; }
     AEVec2 getRealPosition() { return posGlobal; }
     // 坐标转化
-    AEVec2 convertToGlobalPosition(GameObject *go, AEVec2 &pos) {
+    AEVec2 convertToGlobalPosition(GameObject *go) {
         auto parent = go->getParent();
         if (parent) {
-            AEVec2 pos = convertToGlobalPosition(parent, parent->getPosition());
+            AEVec2 pos = convertToGlobalPosition(parent);
             pos.x += go->getPositionX();
             pos.y += go->getPositionY();
             return pos;
         }
         return go->getPosition();
     }
-    AEVec2 convertToRelativePosition(GameObject *go, AEVec2 &pos) {
-        // TODO
+    AEVec2 convertToRelativePosition(GameObject *go) {
+        // TODO:
     }
 
     void setVelocity(AEVec2 vel) { velCurr = vel; }
@@ -102,8 +111,10 @@ public:
     void setParent(GameObject* parent);
     GameObject* getParent();
     void addChild(GameObject* child);
+    void addChild(GameObject* child, const std::string &name);
     void removeChild(GameObject* child);
     vector<GameObject*>& getChildren();
+    GameObject* getChildByName(const std::string &name);
 
     // abilities
     int getAbilityCount() { return abilities.size(); }

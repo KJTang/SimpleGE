@@ -35,7 +35,7 @@ bool LevelOne::init() {
 	this->addChild(layer);
 	MapController::getInstance()->createMapFromFile("wdp.txt", layer);
 	auto player = GameObject::create("test.png");
-	this->addChild(player);
+	this->addChild(player,"player");
 	player->addAbility(PlayerControl::create(player));
 	player->setPosition(0, 0);
 	player->setSize(10);
@@ -55,11 +55,11 @@ bool LevelOne::init() {
 
 void LevelOne::update() {
     Level::update();
-    if (count >= CONST_FPS * 600) {
-        GameLog("LevelChange: LevelOne to LevelTwo");
-        SystemController::getInstance()->setNextLevel(LevelTwo::create());
-    }
-    ++count;
+    //if (count >= CONST_FPS * 600) {
+    //    GameLog("LevelChange: LevelOne to LevelTwo");
+    //    SystemController::getInstance()->setNextLevel(LevelTwo::create());
+    //}
+    //++count;
 }
 
 /********************

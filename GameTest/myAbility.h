@@ -1,9 +1,18 @@
 #pragma once
 
+#include <queue>
 #include "SimpleGE.h"
+
+struct Point{
+    int x;
+    int y;
+};
 
 class PlayerControl : public Ability {
 private:
+    float speed;
+    void onKeyDown(int dirct);
+    std::queue<std::pair<int, Point> > command;
 public:
     PlayerControl();
     ~PlayerControl();

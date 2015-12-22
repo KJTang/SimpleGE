@@ -72,6 +72,10 @@ int MapController::getObjectType(GameObject *owner)
 	return mapInfo[(int)(owner->getPositionX() - 0.5)][(int)(owner->getPositionY() - 0.5)];
 }
 
+int MapController::getObjectType(int mapx, int mapy) {
+    return mapInfo[mapy][mapx];
+}
+
 /***********
 *JDL
 ***********/
