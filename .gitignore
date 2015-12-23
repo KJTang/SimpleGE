@@ -1,6 +1,6 @@
 .vs/
-Debug/
-GameTest/x64
-GameTest/Debug
+Debug/*
+GameTest/x64/*
+GameTest/Debug/*
 *.opensdf
 *.sdf
