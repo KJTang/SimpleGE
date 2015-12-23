@@ -2,8 +2,6 @@
 #include "PathGenerator.h"
 #include <time.h>
 
-const int DISTANCE = 10;
-
 /**************
 MonsterAI
 ***************/
@@ -23,21 +21,21 @@ bool MonsterAI::init(GameObject* owner) {
     this->setName("MonsterAI");
     this->getOwner()->setVelocity(0, 0);
 
-    //??????????????
+    //初始化地图信息
     this->setMapInfo(MapController::getInstance()->mapInfo);
-    //???ú?ú??????×?±ê
+    //随机生成怪物坐标
     this->start = { 10,20 };
     this->curPos = this->nextPos = this->start;
-    //??????????????????
+    //将怪物加载到地图上
     owner->setPositionX(MapController::getInstance()->getXPositionInWorld(this->start.posY));
     owner->setPositionY(MapController::getInstance()->getYPositionInWorld(this->start.posX));
     owner->setSize(10);
-    //????player×?±ê
+    //获取player坐标
     GameObject* player = owner->getParent()->getChildByName("player");
-    this->end.posY = MapController::getInstance()->getXPositionInMap(player->getPositionX());
-    this->end.posX = MapController::getInstance()->getYPositionInMap(player->getPositionY());
+    this->end.posX = MapController::getInstance()->getXPositionInMap(player->getPositionX());
+    this->end.posY = MapController::getInstance()->getYPositionInMap(player->getPositionY());
     //MapController::getInstance()->RndCreateEmptyPosInMap(this->end);
-    //?è???????·?????±??????
+    //设置刷新路径的时间间隔
     srand(time(0));
     this->randtime = (rand() % 20 + 1) * 100;
 
@@ -53,11 +51,11 @@ void MonsterAI::update() {
         while (!this->path.Empty()) {
             this->path.Pop(e);
         }
-        GameObject* player = owner->getParent()->getChildByName("player");
-        this->end.posY = MapController::getInstance()->getXPositionInMap(player->getPositionX());
-        this->end.posX = MapController::getInstance()->getYPositionInMap(player->getPositionY());
+        //GameObject* player = owner->getParent()->getChildByName("player");
+        //this->end.posX = MapController::getInstance()->getXPositionInMap(player->getPositionX());
+        //this->end.posY = MapController::getInstance()->getYPositionInMap(player->getPositionY());
         this->setMapInfo(MapController::getInstance()->mapInfo);
-        if ((start.posX - end.posX <= DISTANCE && start.posX - end.posX >= -DISTANCE) && (start.posY - end.posY <= DISTANCE && start.posY - end.posY >= -DISTANCE)) {
+        if ((start.posX - end.posX <= 5 && start.posX - end.posX >= -5) && (start.posY - end.posY <= 5 && start.posY - end.posY >= -5)) {
             PathGenerator::getInstance()->WFSPath(this->map, this->start, this->end, this->path);
             printf("Updata Path By WFS\n");
             printf("start(%d,%d)\n", start.posX, start.posY);
@@ -72,37 +70,6 @@ void MonsterAI::update() {
         if (!this->path.Empty()) {
             this->path.Pop(this->nextPos);
         }
-    }
-    if (this->curPos.posX ==this->end.posX&&this->curPos.posY == this->end.posY) {
-        MPosType e;
-        this->start = this->nextPos;
-        while (!this->path.Empty()) {
-            this->path.Pop(e);
-        }
-        GameObject* player = owner->getParent()->getChildByName("player");
-        this->end.posY = MapController::getInstance()->getXPositionInMap(player->getPositionX());
-        this->end.posX = MapController::getInstance()->getYPositionInMap(player->getPositionY());
-        this->setMapInfo(MapController::getInstance()->mapInfo);
-        if ((start.posX - end.posX <= DISTANCE && start.posX - end.posX >= -DISTANCE) && (start.posY - end.posY <= DISTANCE && start.posY - end.posY >= -DISTANCE)) {
-            PathGenerator::getInstance()->WFSPath(this->map, this->start, this->end, this->path);
-            printf("Updata Path By WFS\n");
-            printf("start(%d,%d)\n", start.posX, start.posY);
-            printf("end(%d,%d)\n", end.posX, end.posY);
-        }
-        else {
-            PathGenerator::getInstance()->WFSPath(this->map, this->start, this->end, this->path);
-            printf("Updata Path By DFS\n");
-            printf("start(%d,%d)\n", start.posX, start.posY);
-            printf("end(%d,%d)\n", end.posX, end.posY);
-        }
-        if (!this->path.Empty()) {
-            this->path.Pop(this->nextPos);
-        }
-    }
-    GameObject* player = owner->getParent()->getChildByName("player");
-    if (curPos.posX == MapController::getInstance()->getYPositionInMap(player->getPositionY()) &&
-        curPos.posY == MapController::getInstance()->getXPositionInMap(player->getPositionX())) {
-       player->setVisible(false);
     }
     if ((this->count % 20) == 0) {
         //if (this->curPos.posX == this->end.posX&&this->curPos.posY == this->end.posY) {
@@ -119,26 +86,26 @@ void MonsterAI::update() {
 
 void MonsterAI::MoveByPath() {
     auto owner = this->getOwner();
-    //????????
+    //到达终点
     if (this->curPos.posX == this->nextPos.posX&&this->curPos.posY == this->nextPos.posY) {
         return;
     }
-    //????????
+    //水平移动
     else if (this->curPos.posX == this->nextPos.posX) {
         if (this->curPos.posY < this->nextPos.posY) {
-            owner->setPositionX(owner->getPositionX() + 1);		//?ò??????
+            owner->setPositionX(owner->getPositionX() + 1);		//向右运动
         }
         else {
-            owner->setPositionX(owner->getPositionX() - 1);		//?ò×ó????
+            owner->setPositionX(owner->getPositionX() - 1);		//向左运动
         }
     }
-    //???±????
+    //垂直移动
     else if (this->curPos.posY == this->nextPos.posY) {
         if (this->curPos.posX < this->nextPos.posX) {
-            owner->setPositionY(owner->getPositionY() - 1);		//?ò??????
+            owner->setPositionY(owner->getPositionY() - 1);		//向下运动
         }
         else {
-            owner->setPositionY(owner->getPositionY() + 1);		//?ò??????
+            owner->setPositionY(owner->getPositionY() + 1);		//向上运动
         }
     }
 }
