@@ -47,15 +47,15 @@ bool LevelOne::init() {
 	/********************
 	LJD
 	*******************/
-    auto monster = GameObject::create("test.png");
-    this->addChild(monster);
-    monster->addAbility(MonsterAI::create(monster));
-    auto monster2 = GameObject::create("test.png");
-    this->addChild(monster2);
-    monster2->addAbility(MonsterAI::create(monster2));
-    auto monster3 = GameObject::create("test.png");
-    this->addChild(monster3);
-    monster3->addAbility(MonsterAI::create(monster3));
+    //auto monster = GameObject::create("test.png");
+    //this->addChild(monster);
+    //monster->addAbility(MonsterAI::create(monster));
+    //auto monster2 = GameObject::create("test.png");
+    //this->addChild(monster2);
+    //monster2->addAbility(MonsterAI::create(monster2));
+    //auto monster3 = GameObject::create("test.png");
+    //this->addChild(monster3);
+    //monster3->addAbility(MonsterAI::create(monster3));
 
     return true;
 }
