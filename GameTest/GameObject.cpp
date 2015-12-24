@@ -107,7 +107,7 @@ void GameObject::draw() {
 }
 
 void GameObject::destroy() {
-    GameLog("\tGameObject::destroy");
+    //GameLog("\tGameObject::destroy");
     for (auto it = children.begin(); it != children.end(); ++it) {
         (*it)->destroy();
         //children.erase(it);
@@ -137,10 +137,20 @@ void GameObject::addChild(GameObject* child, const std::string &name) {
 void GameObject::removeChild(GameObject* child) {
     for (auto it = children.begin(); it != children.end(); ++it) {
         if ((*it) == child) {
-            child->destroy();
+            (*it)->destroy();
             children.erase(it);
+            break;
         }
     }
+}
+
+bool GameObject::removeFromParent() {
+    if (!parent) {
+        GameLog("GameObject::removeFromParent: can not remove a GameObject without parent");
+        return false;
+    }
+    parent->removeChild(this);
+    return true;
 }
 
 vector<GameObject*>& GameObject::getChildren() {
@@ -157,6 +167,7 @@ GameObject* GameObject::getChildByName(const std::string &name) {
             return (*it);
         }
     }
+    return nullptr;
 }
 
 void GameObject::removeAbility(const std::string& name) {

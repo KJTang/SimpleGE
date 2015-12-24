@@ -26,6 +26,9 @@ private:
     // 获取碰撞检测点
     void getCollisionPoint(int direction, float &x, float &y); // 一组检测点
     void getCollisionPoint(int direction, float &x1, float &y1, float &x2, float &y2); // 两组检测点
+    // 吃豆子
+    int beans;
+    void eatBeans();
 public:
     PlayerControl();
     ~PlayerControl();

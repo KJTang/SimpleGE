@@ -16,37 +16,37 @@ bool LevelOne::init() {
     }
     count = 0;
 
-	/********************
-	TKJ
-	*******************/
-	//auto ani = Animation::create();
-	//this->addChild(ani);
-	//ani->addFrame("animation01.png");
-	//ani->addFrame("animation02.png");
-	//ani->addFrame("animation03.png");
-	//ani->start(0.5, -1);
-	//ani->setSize(20);
-	//ani->setPosition(100, 100);
+    /********************
+    TKJ
+    *******************/
+    //auto ani = Animation::create();
+    //this->addChild(ani);
+    //ani->addFrame("animation01.png");
+    //ani->addFrame("animation02.png");
+    //ani->addFrame("animation03.png");
+    //ani->start(0.5, -1);
+    //ani->setSize(20);
+    //ani->setPosition(100, 100);
 
-	/********************
-	DPW
-	*******************/
-	auto layer = GameObject::create();
-	this->addChild(layer);
-	MapController::getInstance()->createMapFromFile("wdp.txt", layer);
-	auto player = GameObject::create("bean.png");
-	this->addChild(player, "player");
-	player->addAbility(PlayerControl::create(player));
+    /********************
+    DPW
+    *******************/
+    auto mapLayer = GameObject::create();
+    this->addChild(mapLayer, "mapLayer");
+    MapController::getInstance()->createMapFromFile("wdp.txt", mapLayer);
+    auto player = GameObject::create("bean.png");
+    this->addChild(player, "player");
+    player->addAbility(PlayerControl::create(player));
     player->setPosition(MapController::getInstance()->getXPositionInWorld(5), MapController::getInstance()->getYPositionInWorld(1));
     //player->setPosition(0, 0);
-	player->setSize(10);
-	//int flag = MapController::getInstance()->getObjectType(player);
-	//if (flag)
-	//	GameLog("collision");
+    player->setSize(10);
+    //int flag = MapController::getInstance()->getObjectType(player);
+    //if (flag)
+    //	GameLog("collision");
 
-	/********************
-	LJD
-	*******************/
+    /********************
+    LJD
+    *******************/
     auto monster = GameObject::create("test.png");
     this->addChild(monster);
     monster->addAbility(MonsterAI::create(monster));
@@ -97,8 +97,8 @@ bool LevelTwo::init() {
 void LevelTwo::update() {
     Level::update();
     if (count >= 300) {
-		GameLog("LevelChange: LevelTwo to LevelThree");
-		SystemController::getInstance()->setNextLevel(LevelThree::create());
+        GameLog("LevelChange: LevelTwo to LevelThree");
+        SystemController::getInstance()->setNextLevel(LevelThree::create());
     }
     ++count;
 }
@@ -110,29 +110,29 @@ LevelThree::LevelThree() {}
 LevelThree::~LevelThree() {}
 
 bool LevelThree::init() {
-	if (!Level::init()) {
-		return false;
-	}
-	count = 0;
+    if (!Level::init()) {
+        return false;
+    }
+    count = 0;
 
-	auto go = GameObject::create("test.png");
-	this->addChild(go);
-	auto pos = go->getPosition();
-	pos.x += 10;
-	pos.y += 10;
-	go->setPositionX(pos.x);
-	go->setPositionY(pos.y);
-	go->setDirection(3.14f);
-	go->setVelocity(10, 10);
+    auto go = GameObject::create("test.png");
+    this->addChild(go);
+    auto pos = go->getPosition();
+    pos.x += 10;
+    pos.y += 10;
+    go->setPositionX(pos.x);
+    go->setPositionY(pos.y);
+    go->setDirection(3.14f);
+    go->setVelocity(10, 10);
 
 
-	return true;
+    return true;
 }
 
 void LevelThree::update() {
-	Level::update();
-	if (count >= 500) {
-		SystemController::getInstance()->quitGame();
-	}
-	++count;
+    Level::update();
+    if (count >= 500) {
+        SystemController::getInstance()->quitGame();
+    }
+    ++count;
 }
