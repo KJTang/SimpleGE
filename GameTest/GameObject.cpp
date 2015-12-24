@@ -112,6 +112,9 @@ void GameObject::destroy() {
         (*it)->destroy();
         //children.erase(it);
     }
+	while (abilities.size()) {
+		abilities.pop_back();
+	}
     delete this;
 }
 

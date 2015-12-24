@@ -47,9 +47,9 @@ public:
 	}
 
 	/*根据深度优先搜索生成路线*/
-	bool BFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, Stack<MPosType> &path);
+	bool DFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, Stack<MPosType> &path);
 	/*根据广度优先搜索生成路线*/
-	bool WFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, Stack<MPosType> &path);
+	bool BFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, Stack<MPosType> &path);
 	/*判断当前结点是否可通*/
 	bool Pass(int(*map)[MAP_LOW], MPosType curPos);
 	/*根据当前方向定位到下一个结点*/

@@ -32,9 +32,7 @@ public:
 
 	/*«Âø’’ª*/
 	bool Clear() {
-		if (base != top) {
-			top = base = NULL;							//÷√ø’’ª
-		}
+		top = base;
 		return true;
 	}
 

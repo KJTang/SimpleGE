@@ -207,6 +207,6 @@ void PlayerControl::eatBeans() {
         //bean->setVisible(false);
         ++beans;
         bean->removeFromParent();
-        printf("Have Ate Beans: %d\n", beans);
+        //printf("Have Ate Beans: %d\n", beans);
     }
 }

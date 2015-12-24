@@ -11,7 +11,7 @@ Create Monster Path
 ******************/
 
 /*根据深度优先搜索生成路线*/
-bool PathGenerator::BFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, Stack<MPosType> &path) {
+bool PathGenerator::DFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, Stack<MPosType> &path) {
 	Stack<DElemType> S;
 	DElemType e;
 	MPosType curPos;
@@ -64,7 +64,7 @@ bool PathGenerator::BFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, St
 }
 
 /*根据广度优先搜索生成路线*/
-bool PathGenerator::WFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, Stack<MPosType> &path) {
+bool PathGenerator::BFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, Stack<MPosType> &path) {
 	Queue<WElemType> Q;
 	WElemType e,e1;
 	MPosType curPos,nextPos;
