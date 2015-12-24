@@ -34,10 +34,6 @@ bool MonsterAI::init(GameObject* owner) {
     this->player = owner->getParent()->getChildByName("player");
     this->end.posY = MapController::getInstance()->getXPositionInMap(player->getPositionX());
     this->end.posX = MapController::getInstance()->getYPositionInMap(player->getPositionY());
-    //MapController::getInstance()->RndCreateEmptyPosInMap(this->end);
-    //设置刷新路径的时间间隔
-    /*srand(time(0));
-    this->randtime = (rand() % 20 + 1) * 100;*/
 
     return true;
 }
@@ -45,31 +41,36 @@ bool MonsterAI::init(GameObject* owner) {
 void MonsterAI::update() {
     auto owner = this->getOwner();
     if ((this->count % 200) == 0) {
-        //this->randtime = (rand() % 10 + 1) * 100;
         MPosType e;
         this->start = this->nextPos;
         while (!this->path.Empty()) {
             this->path.Pop(e);
         }
-        this->end.posY = MapController::getInstance()->getXPositionInMap(player->getPositionX());
-        this->end.posX = MapController::getInstance()->getYPositionInMap(player->getPositionY());
+		if (player != NULL) {
+			this->end.posY = MapController::getInstance()->getXPositionInMap(player->getPositionX());
+			this->end.posX = MapController::getInstance()->getYPositionInMap(player->getPositionY());
+		}
+		else {
+			this->end = { 10,20 };
+		}
         this->setMapInfo(MapController::getInstance()->mapInfo);
-        if ((start.posX - end.posX <= DISTANCE && start.posX - end.posX >= -DISTANCE) && (start.posY - end.posY <= DISTANCE && start.posY - end.posY >= -DISTANCE)) {
+        if ((start.posX - end.posX <= DISTANCE && start.posX - end.posX >= -DISTANCE) &&
+			(start.posY - end.posY <= DISTANCE && start.posY - end.posY >= -DISTANCE)) {
             PathGenerator::getInstance()->WFSPath(this->map, this->start, this->end, this->path);
-            printf("Updata Path By BFS\n");
-            printf("start(%d,%d)\n", start.posX, start.posY);
-            printf("end(%d,%d)\n", end.posX, end.posY);
         }
         else {
             PathGenerator::getInstance()->BFSPath(this->map, this->start, this->end, this->path);
-            printf("Updata Path By DFS\n");
-            printf("start(%d,%d)\n", start.posX, start.posY);
-            printf("end(%d,%d)\n", end.posX, end.posY);
         }
         if (!this->path.Empty()) {
             this->path.Pop(this->nextPos);
         }
     }
+	if ((player!=NULL)&&
+		this->curPos.posX == MapController::getInstance()->getYPositionInMap(player->getPositionY()) &&
+		this->curPos.posY == MapController::getInstance()->getXPositionInMap(player->getPositionX())) {
+		owner->getParent()->removeChild(player);
+		player = NULL;
+	}
     if ((this->count % 20) == 0) {
         this->curPos = this->nextPos;
         if (!this->path.Empty()) {
@@ -83,20 +84,20 @@ void MonsterAI::update() {
 				while (!this->path.Empty()) {
 					this->path.Pop(e);
 				}
-				this->end.posY = MapController::getInstance()->getXPositionInMap(player->getPositionX());
-				this->end.posX = MapController::getInstance()->getYPositionInMap(player->getPositionY());
+				if (player != NULL) {
+					this->end.posY = MapController::getInstance()->getXPositionInMap(player->getPositionX());
+					this->end.posX = MapController::getInstance()->getYPositionInMap(player->getPositionY());
+				}
+				else {
+					this->end = { 10,20 };
+				}
 				this->setMapInfo(MapController::getInstance()->mapInfo);
-				if ((start.posX - end.posX <= DISTANCE && start.posX - end.posX >= -DISTANCE) && (start.posY - end.posY <= DISTANCE && start.posY - end.posY >= -DISTANCE)) {
+				if ((start.posX - end.posX <= DISTANCE && start.posX - end.posX >= -DISTANCE) &&
+					(start.posY - end.posY <= DISTANCE && start.posY - end.posY >= -DISTANCE)) {
 					PathGenerator::getInstance()->WFSPath(this->map, this->start, this->end, this->path);
-					printf("Updata Path By BFS\n");
-					printf("start(%d,%d)\n", start.posX, start.posY);
-					printf("end(%d,%d)\n", end.posX, end.posY);
 				}
 				else {
 					PathGenerator::getInstance()->BFSPath(this->map, this->start, this->end, this->path);
-					printf("Updata Path By DFS\n");
-					printf("start(%d,%d)\n", start.posX, start.posY);
-					printf("end(%d,%d)\n", end.posX, end.posY);
 				}
 				if (!this->path.Empty()) {
 					this->path.Pop(this->nextPos);
