@@ -65,7 +65,9 @@ void PlayerControl::update() {
         int y1 = MapController::getInstance()->getYPositionInMap(collisionY1 + deltaY[nextDirection] * speed);
         int x2 = MapController::getInstance()->getXPositionInMap(collisionX2 + deltaX[nextDirection] * speed);
         int y2 = MapController::getInstance()->getYPositionInMap(collisionY2 + deltaY[nextDirection] * speed);
-        if (MapController::getInstance()->getObjectType(x1, y1) != 1 && MapController::getInstance()->getObjectType(x2, y2) != 1) {
+        if (x1 == x2 && y1 == y2 &&
+            MapController::getInstance()->getObjectType(x1, y1) != 1 &&
+            MapController::getInstance()->getObjectType(x2, y2) != 1) {
             // Œﬁ’œ∞≠
             if (!isOppositeDirection(curDirection, nextDirection)) {
                 // printf("turn: (%d, %d)  (%d, %d)\n", x1, y1, x1 - deltaX[nextDirection], y1 + deltaY[nextDirection]);
