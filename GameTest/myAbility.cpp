@@ -25,6 +25,7 @@ bool PlayerControl::init(GameObject* owner) {
     this->setName("PlayerControl");
     speed = 1;
     curDirection = nextDirection = 0;
+    beans = 0;
 
     return true;
 }
@@ -78,6 +79,9 @@ void PlayerControl::update() {
             nextDirection = 0;
         }
     }
+
+    // eat beans
+    this->eatBeans();
 }
 
 void PlayerControl::onKeyDown(int direction) {
@@ -189,5 +193,20 @@ void PlayerControl::getCollisionPoint(int direction, float &x1, float &y1, float
             y1 = y2 = curY;
             break;
         }
+    }
+}
+
+void PlayerControl::eatBeans() {
+    auto owner = this->getOwner();
+    int curX = MapController::getInstance()->getXPositionInMap(owner->getPositionX() + 10); // +10 Æ«ÒÆÁ¿
+    int curY = MapController::getInstance()->getYPositionInMap(owner->getPositionY() - 10); // -10 Æ«ÒÆÁ¿
+    char name[10];
+    sprintf(name, "(%d, %d)", curX, curY);
+    auto bean = owner->getParent()->getChildByName("mapLayer")->getChildByName("beanLayer")->getChildByName(name);
+    if (bean) {
+        //bean->setVisible(false);
+        ++beans;
+        bean->removeFromParent();
+        printf("Have Ate Beans: %d\n", beans);
     }
 }

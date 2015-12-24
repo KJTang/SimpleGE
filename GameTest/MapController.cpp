@@ -8,51 +8,64 @@ MapController::MapController() {}
 MapController::~MapController() {}
 
 bool MapController::init() {
-	srand(time(0));
-	return true;
+    srand(time(0));
+    return true;
 }
 
 bool MapController::createMapFromFile(char* filename, GameObject* layer)
 {
-	FILE *fp = NULL;
-	if ((fp = fopen(filename, "r")) == NULL)
-		return false;
-	int length = 0, width = 0;
-	int i = 0, j = 0;
-	fscanf(fp, "%d%d", &length, &width);
-	while (i < length)
-	{
-		j = 0;
-		while (j < width) {
-			fscanf(fp, "%d", &mapInfo[i][j]);
-			j++;
-		}
-		i++;
-	}
-	for (i = 0; i != length; i++)
-	{
-		for (j = 0; j != width; j++)
-		{
-			if (mapInfo[i][j] == 1)
-			{
-				auto map_obj = GameObject::create("wall.png");
-				layer->addChild(map_obj);
-				map_obj->setPosition((j - width / 2) * 20.0, (i - length / 2) * -20.0);
-				//map_obj->setActive(false);
-				map_obj->setSize(10);
-			}
-			else if (mapInfo[i][j] == 0)
-			{
-				//auto map_obj = GameObject::create("bean.png");
-				//layer->addChild(map_obj);
-				//map_obj->setPosition((j - width / 2) * 20.0, (i - length / 2) * -20.0);
-				////map_obj->setActive(false);
-				//map_obj->setSize(5);
-			}
-		}
-	}
+    auto beanLayer = layer->getChildByName("beanLayer");
+    if (!beanLayer) {
+        beanLayer = GameObject::create();
+        layer->addChild(beanLayer, "beanLayer");
+    }
+    auto wallLayer = layer->getChildByName("wallLayer");
+    if (!wallLayer) {
+        wallLayer = GameObject::create();
+        layer->addChild(wallLayer, "wallLayer");
+    }
 
-	return true;
+    FILE *fp = NULL;
+    if ((fp = fopen(filename, "r")) == NULL)
+        return false;
+    int length = 0, width = 0;
+    int i = 0, j = 0;
+    fscanf(fp, "%d%d", &length, &width);
+    while (i < length)
+    {
+        j = 0;
+        while (j < width) {
+            fscanf(fp, "%d", &mapInfo[i][j]);
+            j++;
+        }
+        i++;
+    }
+    for (i = 0; i != length; i++)
+    {
+        for (j = 0; j != width; j++)
+        {
+            if (mapInfo[i][j] == 1) // Ç½
+            {
+                auto map_obj = GameObject::create("wall.png");
+                wallLayer->addChild(map_obj);
+                map_obj->setPosition((j - width / 2) * 20.0, (i - length / 2) * -20.0);
+                //map_obj->setActive(false);
+                map_obj->setSize(10);
+            }
+            else if (mapInfo[i][j] == 0) // ¶¹×Ó
+            {
+                auto map_obj = GameObject::create("bean.png");
+                char name[10];
+                sprintf(name, "(%d, %d)", j, i);
+                beanLayer->addChild(map_obj, name);
+                map_obj->setPosition((j - width / 2) * 20.0, (i - length / 2) * -20.0);
+                //map_obj->setActive(false);
+                map_obj->setSize(5);
+            }
+        }
+    }
+
+    return true;
 }
 
 int MapController::getXPositionInMap(float realPosX) // ½«ÕæÊµX×ø±ê×ª»»ÎªµØÍ¼ÖÐµÄX×ø±ê
@@ -64,14 +77,14 @@ int MapController::getXPositionInMap(float realPosX) // ½«ÕæÊµX×ø±ê×ª»»ÎªµØÍ¼ÖÐµ
 
 int MapController::getYPositionInMap(float realPosY) // ½«ÕæÊµX×ø±ê×ª»»ÎªµØÍ¼ÖÐµÄX×ø±ê
 {
-	//return (int)(realPosY / 20);
+    //return (int)(realPosY / 20);
     return (int)(realPosY / -20 + 10);
 }
 
 //0±íÊ¾Ã»ÓÐ¶«Î÷£¬1±íÊ¾Ç½£¬2±íÊ¾¶¹×Ó£¬3±íÊ¾´óÁ¦Íè
 int MapController::getObjectType(GameObject *owner)
 {
-	return mapInfo[(int)(owner->getPositionX() - 0.5)][(int)(owner->getPositionY() - 0.5)];
+    return mapInfo[(int)(owner->getPositionX() - 0.5)][(int)(owner->getPositionY() - 0.5)];
 }
 
 int MapController::getObjectType(int mapx, int mapy) {
@@ -84,52 +97,52 @@ int MapController::getObjectType(int mapx, int mapy) {
 
 /*µØÍ¼ÖÐµÄX×ø±ê×ª»¯ÎªÕæÊµX×ø±ê*/
 float MapController::getXPositionInWorld(int mapPosX) {
-	return (float)((mapPosX - 40 / 2) * 20.0);
+    return (float)((mapPosX - 40 / 2) * 20.0);
 }
 
 /*µØÍ¼ÖÐµÄY×ø±ê×ª»¯ÎªÕæÊµY×ø±ê*/
 float MapController::getYPositionInWorld(int mapPosY) {
-	return (float)((mapPosY - 20 / 2) * -20.0);
+    return (float)((mapPosY - 20 / 2) * -20.0);
 }
 
 /*Ëæ»úÉú³ÉÒ»¸ö¿ÕµÄÊÀ½ç×ø±ê*/
 void MapController::RndCreateEmptyPosInWorld(WPosType &wPos) {
-	int x, y;
-	do {
-		x = rand() % 20;
-		y = rand() % 40;
-	}
-	while (mapInfo[x][y] == 1);
-	wPos.posX = (float)(x - 40 / 2) * 20.0;
-	wPos.posY = (float)(y - 40 / 2) * 20.0;
+    int x, y;
+    do {
+        x = rand() % 20;
+        y = rand() % 40;
+    }
+    while (mapInfo[x][y] == 1);
+    wPos.posX = (float)(x - 40 / 2) * 20.0;
+    wPos.posY = (float)(y - 40 / 2) * 20.0;
 }
 
 /*Ëæ»úÉú³ÉÒ»¸ö¿ÕµÄµØÍ¼×ø±ê*/
 void MapController::RndCreateEmptyPosInMap(MPosType &mPos) {
-	int x, y;
-	do {
-		x = rand() % 20;
-		y = rand() % 40;
-	}
-	while (mapInfo[x][y] == 1);
-	mPos.posX = x;
-	mPos.posY = y;
+    int x, y;
+    do {
+        x = rand() % 20;
+        y = rand() % 40;
+    }
+    while (mapInfo[x][y] == 1);
+    mPos.posX = x;
+    mPos.posY = y;
 }
 
 /*½«ÊÀ½ç×ø±ê×ª»»ÎªµØÍ¼×ø±ê*/
 MPosType MapController::ChangeWorldPosToMapPos(WPosType wPos) {
-	MPosType mPos;
-	mPos.posX = (int)(wPos.posX / 20);
-	mPos.posY = (int)(wPos.posY / 20);
-	return mPos;
+    MPosType mPos;
+    mPos.posX = (int)(wPos.posX / 20);
+    mPos.posY = (int)(wPos.posY / 20);
+    return mPos;
 }
 
 /*½«µØÍ¼×ø±ê×ª»»ÎªÊÀ½ç×ø±ê*/
 WPosType MapController::ChangeWorldPosToMapPos(MPosType mPos) {
-	WPosType wPos;
-	wPos.posX = (float)((mPos.posX - 40 / 2) * 20.0);
-	wPos.posY = (float)((mPos.posY - 20 / 2) * -20.0);
-	return wPos;
+    WPosType wPos;
+    wPos.posX = (float)((mPos.posX - 40 / 2) * 20.0);
+    wPos.posY = (float)((mPos.posY - 20 / 2) * -20.0);
+    return wPos;
 }
 
 

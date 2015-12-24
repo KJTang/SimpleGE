@@ -113,6 +113,7 @@ public:
     void addChild(GameObject* child);
     void addChild(GameObject* child, const std::string &name);
     void removeChild(GameObject* child);
+    bool removeFromParent();
     vector<GameObject*>& getChildren();
     GameObject* getChildByName(const std::string &name);
 
