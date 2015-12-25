@@ -18,19 +18,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     system->setCurrentLevel(level);
     level->addChild(GameObject::create());
 
-    
-    // main loop
-    while (!system->isGameQuit()) {
-        AESysFrameStart();		// 帧开始：封装了PeekMessage
-        AEInputUpdate();		// Alpha Engine处理输入
-        system->update();
-        system->draw();
-        AESysFrameEnd();		// 帧结束
-
-        if (system->isLevelChanged()) {
-            system->changeLevel();
-        }
-    }
+    // GameStart
+    system->start();
 
     // System Exit
     system->exit();

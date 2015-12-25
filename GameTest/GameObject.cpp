@@ -9,6 +9,7 @@ bool GameObject::init() {
     isVisible = true;
     parent = nullptr;
     texture = nullptr;
+    referenceCount = 0;
     // mesh
     AEGfxMeshStart();
     //AEGfxTriAdd(
@@ -36,6 +37,7 @@ bool GameObject::init(const std::string &textureName) {
     isVisible = true;
     parent = nullptr;
     texture = nullptr;
+    referenceCount = 0;
     // mesh
     AEGfxMeshStart();
     AEGfxTriAdd(
@@ -110,11 +112,10 @@ void GameObject::destroy() {
     //GameLog("\tGameObject::destroy");
     for (auto it = children.begin(); it != children.end(); ++it) {
         (*it)->destroy();
-        //children.erase(it);
     }
-	while (abilities.size()) {
-		abilities.pop_back();
-	}
+    while (abilities.size()) {
+        abilities.pop_back();
+    }
     delete this;
 }
 
@@ -129,19 +130,20 @@ GameObject* GameObject::getParent() {
 void GameObject::addChild(GameObject* child) {
     children.push_back(child);
     child->setParent(this);
+    child->retain();
 }
 
 void GameObject::addChild(GameObject* child, const std::string &name) {
     children.push_back(child);
     child->setParent(this);
     child->setName(name);
+    child->retain();
 }
 
 void GameObject::removeChild(GameObject* child) {
     for (auto it = children.begin(); it != children.end(); ++it) {
         if ((*it) == child) {
-            (*it)->destroy();
-            children.erase(it);
+            (*it)->release();
             break;
         }
     }
@@ -156,7 +158,7 @@ bool GameObject::removeFromParent() {
     return true;
 }
 
-vector<GameObject*>& GameObject::getChildren() {
+std::vector<GameObject*>& GameObject::getChildren() {
     return children;
 }
 
@@ -171,6 +173,18 @@ GameObject* GameObject::getChildByName(const std::string &name) {
         }
     }
     return nullptr;
+}
+
+void GameObject::retain() {
+    ++referenceCount;
+}
+
+void GameObject::release() {
+    referenceCount = 0;
+}
+
+int GameObject::getReferenceCount() {
+    return referenceCount;
 }
 
 void GameObject::removeAbility(const std::string& name) {

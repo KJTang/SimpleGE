@@ -32,9 +32,11 @@ private:
     void setRootObject(GameObject* rootObj);
     void recursiveUpdate(GameObject* go);
     void recursiveDraw(GameObject* go);
+    void recursiveClear(GameObject* go);
 public:
     void update();
     void draw();
+    void clear(); //清除要删除的GameObject
 
 public:
     SystemController() {}
@@ -49,6 +51,8 @@ public:
 
     // 系统初始化
     int init(HINSTANCE hInstance, int nCmdShow);
+    // 进入游戏循环
+    void start();
     // 切换关卡
     bool isLevelChanged() { return levelChange; }
     void changeLevel();

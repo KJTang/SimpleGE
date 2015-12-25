@@ -52,6 +52,24 @@ int SystemController::init(HINSTANCE hInstance, int nCmdShow) {
     return 0;
 }
 
+void SystemController::start() {
+    // main loop
+    while (!isGameQuit()) {
+        AESysFrameStart();		// 帧开始：封装了PeekMessage
+        AEInputUpdate();		// Alpha Engine处理输入
+
+        update();
+        draw();
+        clear(); // 清理不需要的GameObject
+
+        AESysFrameEnd();		// 帧结束
+
+        if (isLevelChanged()) {
+            changeLevel();
+        }
+    }
+}
+
 void SystemController::setCurrentLevel(Level* level) {
     assert(level);
     if (currentLevel) {
@@ -59,6 +77,7 @@ void SystemController::setCurrentLevel(Level* level) {
     }
     currentLevel = level;
     rootObject = currentLevel;
+    rootObject->retain();
 }
 
 void SystemController::setNextLevel(Level* level) {
@@ -72,13 +91,8 @@ void SystemController::setNextLevel(Level* level) {
 
 // 切换关卡
 void SystemController::changeLevel() {
-    assert(nextLevel);
-    if (currentLevel) {
-        currentLevel->destroy();
-    }
-    currentLevel = nextLevel;
+    this->setCurrentLevel(nextLevel);
     nextLevel = nullptr;
-    rootObject = currentLevel;
     levelChange = false;
 }
 
@@ -122,6 +136,7 @@ void SystemController::recursiveUpdate(GameObject* go) {
                 (*it)->update();
             }
         }
+        int test = go->getChildren().size();
         for (auto it = go->getChildren().begin(); it != go->getChildren().end(); ++it) {
             recursiveUpdate((*it));
         }
@@ -145,6 +160,27 @@ void SystemController::recursiveDraw(GameObject* go) {
         go->draw();
         for (auto it = go->getChildren().begin(); it != go->getChildren().end(); ++it) {
             recursiveDraw((*it));
+        }
+    }
+}
+
+void SystemController::clear() {
+    assert(rootObject);
+    recursiveClear(rootObject);
+}
+
+void SystemController::recursiveClear(GameObject* go) {
+    std::vector<GameObject*> &children = go->getChildren();
+    for (int i = 0; i != children.size(); ) {
+        if (children[i]->getReferenceCount() == 0) {
+            children[i]->destroy();
+            children.erase(children.begin()+i);
+            int test = go->getChildren().size();
+            printf("--%d\n", test);
+        }
+        else {
+            recursiveClear(children[i]);
+            ++i;
         }
     }
 }

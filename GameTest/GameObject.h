@@ -28,6 +28,7 @@ private:
 
     GameObject* parent; // 当前节点的parent
     vector<GameObject*> children; // 当前节点的children
+    int referenceCount; // 引用计数
 
     vector<Ability*> abilities; // GameObject's extra ability
 public:
@@ -116,6 +117,10 @@ public:
     bool removeFromParent();
     vector<GameObject*>& getChildren();
     GameObject* getChildByName(const std::string &name);
+
+    void retain(); // 增加引用计数
+    void release(); // 引用计数设为0
+    int getReferenceCount();
 
     // abilities
     int getAbilityCount() { return abilities.size(); }
