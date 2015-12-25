@@ -30,9 +30,11 @@ bool PathGenerator::DFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, St
 			if ((curPos.posX == end.posX)&&(curPos.posY == end.posY)) {
 				//已经生成从起点到终点的通路
 				//将栈S中的元素依次取出并将坐标入栈到path中，用path返回通路的坐标
+				printf("\nDFS\n");
 				while (!S.Empty()) {
 					S.Pop(e);
 					curPos = e.seat;
+					printf("(%d,%d)->", curPos.posX, curPos.posY);
 					path.Push(curPos);
 				}
 				return true;
@@ -113,7 +115,9 @@ bool PathGenerator::BFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, St
 					//已经生成从起点到终点的通路
 					//将队列Q中的元素依次取出并将坐标入栈到path中，用path返回通路的坐标
 					curPos = end;
+					printf("\nBFS\n");
 					while (curVexs[curPos.posX][curPos.posY]) {
+						printf("(%d,%d)->", curPos.posX, curPos.posY);
 						path.Push(curPos);
 						curVexs[curPos.posX][curPos.posY] = 0;
 						for (int i = 1; i <= 4; i++) {

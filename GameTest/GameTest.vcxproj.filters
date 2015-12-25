@@ -108,9 +108,6 @@
     <ClInclude Include="MapController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PathGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Queue.h">
       <Filter>Header Files\SimpleGE</Filter>
     </ClInclude>
@@ -154,9 +151,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MapController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PathGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
