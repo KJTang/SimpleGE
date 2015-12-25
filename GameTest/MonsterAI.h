@@ -1,44 +1,14 @@
-#ifndef MONSTER_AI
-#define MONSTER_AI
+#pragma once
 
 #include "SimpleGE.h"
-#include "Stack.h"
-#include "Queue.h"
+#include "PathGenerator.h"
 
 const int DISTANCE = 10;
-
-#define MAP_ROW 20 //数组行数
-#define MAP_LOW 40 //数组列数
-
-/*地图坐标类型定义*/
-typedef struct MPosType {
-	int posX;		//横坐标，对应数组行
-	int posY;		//纵坐标，对应数组列
-}MPosType;
-
-/*世界坐标类型定义*/
-typedef struct WPosType {
-	float posX;		//横坐标
-	float posY;		//纵坐标
-}WPosType;
-
-/*基于宽度优先搜索算法下的路径结点类型定义*/
-typedef struct DElemType {
-	int ord;		//路径结点在路径上的“序号”
-	MPosType seat;	//路径结点在地图上的“坐标位置”
-	int di;			//从此结点走向下一结点的“方向”
-}DElemType;
-
-/*基于深度优先搜索算法下的路径结点类型定义*/
-typedef struct WElemType {
-	int vexs[20][40];  //保存从开始结点到当前结点的路径
-	MPosType seat;				  //路径结点在地图上的“坐标位置”
-}WElemType;
 
 
 class MonsterAI : public Ability {
 private:
-	int count, randtime, flag, rndDi;
+	int count, randtime, flag;
 	int map[MAP_ROW][MAP_LOW];
 	Stack<MPosType> path;
 	MPosType curPos, nextPos, start, end;
@@ -52,15 +22,4 @@ public:
 	virtual void update();
 	void MoveByPath();
 	void setMapInfo(int (*map)[40]);
-
-	/*根据深度优先搜索生成路线*/
-	bool DFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, Stack<MPosType> &path);
-	/*根据广度优先搜索生成路线*/
-	bool BFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, Stack<MPosType> &path);
-	/*判断当前结点是否可通*/
-	bool Pass(int(*map)[MAP_LOW], MPosType curPos);
-	/*根据当前方向定位到下一个结点*/
-	MPosType NextPos(MPosType seat, int di);
 };
-
-#endif

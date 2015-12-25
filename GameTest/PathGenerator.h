@@ -1,5 +1,6 @@
 #pragma once
 
+#include<time.h>
 #include "Stack.h"
 #include "Queue.h"
 
@@ -35,13 +36,13 @@ class PathGenerator {
 private:
 	static PathGenerator *sharedGenerator;
 public:
-	int rndDi;
 	PathGenerator();
 	~PathGenerator();
 
 	static PathGenerator* getInstance() {
 		if (!sharedGenerator) {
 			sharedGenerator = new PathGenerator();
+			srand(time(0));
 		}
 		return sharedGenerator;
 	}
@@ -53,5 +54,5 @@ public:
 	/*判断当前结点是否可通*/
 	bool Pass(int(*map)[MAP_LOW], MPosType curPos);
 	/*根据当前方向定位到下一个结点*/
-	MPosType NextPos(MPosType seat, int di);
+	MPosType NextPos(MPosType seat, int di, int rndDi);
 };
