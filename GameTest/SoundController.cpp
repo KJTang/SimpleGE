@@ -20,8 +20,6 @@ bool SoundController::init() {
     /*
     Create a System object and initialize
     */
-    quit = false; /// temp
-
     result = FMOD::System_Create(&system);
     if (result != FMOD_OK) {
         return false;
@@ -32,18 +30,18 @@ bool SoundController::init() {
         return false;
     }
 
-    musicThread = new std::thread(&SoundController::mainLoop, this);
-    musicThread->detach();
+    //musicThread = new std::thread(&SoundController::mainLoop, this);
+    //musicThread->detach();
     return true;
 }
 
-void SoundController::mainLoop() {
-    while (!quit) {
-        Sleep(50);
-    }
-}
+//void SoundController::mainLoop() {
+//    while (!quit) {
+//        Sleep(50);
+//    }
+//}
 
-bool SoundController::loadMusic(const std::string &filename) {
+bool SoundController::loadMusic(const std::string &filename, void(*callback)(void *d), void *data) {
     FMOD::Sound *sound = nullptr;
     result = system->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
     if (result != FMOD_OK) {
@@ -51,7 +49,10 @@ bool SoundController::loadMusic(const std::string &filename) {
     }
 
     loadedSounds.insert(std::make_pair(filename, sound));
-    //printf("sounds size=%d\n", loadedSounds.size());
+    // start the callback function
+    if (callback) {
+        callback(data);
+    }
 }
 
 bool SoundController::playMusic(const std::string &filename, bool loop) {
