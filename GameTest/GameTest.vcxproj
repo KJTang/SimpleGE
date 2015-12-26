@@ -137,6 +137,14 @@
     <ClInclude Include="AEUtil.h" />
     <ClInclude Include="AEVec2.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="fmod.h" />
+    <ClInclude Include="fmod.hpp" />
+    <ClInclude Include="fmod_codec.h" />
+    <ClInclude Include="fmod_common.h" />
+    <ClInclude Include="fmod_dsp.h" />
+    <ClInclude Include="fmod_dsp_effects.h" />
+    <ClInclude Include="fmod_errors.h" />
+    <ClInclude Include="fmod_output.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Macros.h" />
@@ -148,15 +156,22 @@
     <ClInclude Include="myObject.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="SimpleGE.h" />
+    <ClInclude Include="SoundController.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="SystemController.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
+    <None Include="fmod.dll" />
+    <None Include="fmodL.dll" />
     <None Include="glew32.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Alpha_Engine.lib" />
+    <Library Include="fmodL_vc.lib" />
+    <Library Include="fmod_vc.lib" />
+    <Library Include="libfmod.a" />
+    <Library Include="libfmodL.a" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ability.cpp" />
@@ -170,7 +185,21 @@
     <ClCompile Include="myAbility.cpp" />
     <ClCompile Include="myLevel.cpp" />
     <ClCompile Include="myObject.cpp" />
+    <ClCompile Include="SoundController.cpp" />
     <ClCompile Include="SystemController.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="animation01.png" />
+    <Image Include="animation02.png" />
+    <Image Include="animation03.png" />
+    <Image Include="bean.png" />
+    <Image Include="test.png" />
+    <Image Include="test1.png" />
+    <Image Include="test2.png" />
+    <Image Include="wall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="wdp.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

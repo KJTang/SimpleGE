@@ -22,6 +22,9 @@
     <Filter Include="Source Files\SimpleGE">
       <UniqueIdentifier>{31eb4dac-7c02-4ef3-9bfa-03d62422d5ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\fmod">
+      <UniqueIdentifier>{d0041afd-1af6-42dd-9f15-48726c9fca74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DPipelineTools.h">
@@ -114,13 +117,46 @@
     <ClInclude Include="Queue.h">
       <Filter>Header Files\SimpleGE</Filter>
     </ClInclude>
+    <ClInclude Include="fmod_output.h">
+      <Filter>Header Files\fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod.hpp">
+      <Filter>Header Files\fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_codec.h">
+      <Filter>Header Files\fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_common.h">
+      <Filter>Header Files\fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_dsp.h">
+      <Filter>Header Files\fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_dsp_effects.h">
+      <Filter>Header Files\fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_errors.h">
+      <Filter>Header Files\fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod.h">
+      <Filter>Header Files\fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundController.h">
+      <Filter>Header Files\SimpleGE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
     <None Include="glew32.dll" />
+    <None Include="fmod.dll" />
+    <None Include="fmodL.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Alpha_Engine.lib" />
+    <Library Include="fmod_vc.lib" />
+    <Library Include="fmodL_vc.lib" />
+    <Library Include="libfmod.a" />
+    <Library Include="libfmodL.a" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameTest.cpp">
@@ -159,5 +195,37 @@
     <ClCompile Include="PathGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SoundController.cpp">
+      <Filter>Source Files\SimpleGE</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="animation01.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="animation02.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="animation03.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="bean.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="test.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="test1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="test2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="wall.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="wdp.txt" />
   </ItemGroup>
 </Project>
