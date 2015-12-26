@@ -136,7 +136,7 @@ bool PathGenerator::BFSPath(int(*map)[MAP_LOW], MPosType start, MPosType end, St
 
 /*判断当前结点是否可通*/
 bool PathGenerator::Pass(int(*map)[MAP_LOW], MPosType curPos) {
-	if (map[curPos.posX][curPos.posY] == 0) {
+	if (map[curPos.posX][curPos.posY] == 0 || map[curPos.posX][curPos.posY] == 2) {
 		return true;
 	}
 	else {

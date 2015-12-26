@@ -176,7 +176,6 @@ void SystemController::recursiveClear(GameObject* go) {
             children[i]->destroy();
             children.erase(children.begin()+i);
             int test = go->getChildren().size();
-            printf("--%d\n", test);
         }
         else {
             recursiveClear(children[i]);

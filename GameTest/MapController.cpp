@@ -52,7 +52,7 @@ bool MapController::createMapFromFile(char* filename, GameObject* layer)
                 //map_obj->setActive(false);
                 map_obj->setSize(10);
             }
-            else if (mapInfo[i][j] == 0) // ¶¹×Ó
+            else if (mapInfo[i][j] == 2) // ¶¹×Ó
             {
                 auto map_obj = GameObject::create("bean.png");
                 char name[10];
