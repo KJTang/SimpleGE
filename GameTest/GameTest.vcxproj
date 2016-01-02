@@ -151,7 +151,7 @@
     <ClInclude Include="MapController.h" />
     <ClInclude Include="MonsterAI.h" />
     <ClInclude Include="PathGenerator.h" />
-    <ClInclude Include="myAbility.h" />
+    <ClInclude Include="PlayerControl.h" />
     <ClInclude Include="myLevel.h" />
     <ClInclude Include="myObject.h" />
     <ClInclude Include="Queue.h" />
@@ -182,7 +182,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="MapController.cpp" />
     <ClCompile Include="MonsterAI.cpp" />
-    <ClCompile Include="myAbility.cpp" />
+    <ClCompile Include="PlayerControl.cpp" />
     <ClCompile Include="myLevel.cpp" />
     <ClCompile Include="myObject.cpp" />
     <ClCompile Include="SoundController.cpp" />

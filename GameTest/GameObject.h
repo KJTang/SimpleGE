@@ -48,24 +48,28 @@ public:
     void setVisible(bool vi) { isVisible = vi; }
     bool getVisible() { return isVisible; }
     // getter & setter
-    void setSize(float s) { size = s; }
-    float getSize() { return size; }
+    virtual void setSize(float s) { size = s; }
+    virtual float getSize() { return size; }
 
     // position in relative
-    void setPosition(AEVec2 pos) { posRelative = pos; posGlobal = convertToGlobalPosition(this); }
-    void setPosition(float x, float y) { posRelative.x = x; posRelative.y = y; posGlobal = convertToGlobalPosition(this); }
-    void setPositionX(float x) { posRelative.x = x; posGlobal = convertToGlobalPosition(this); }
-    void setPositionY(float y) { posRelative.y = y; posGlobal = convertToGlobalPosition(this); }
+    virtual void setPosition(AEVec2 pos) { posRelative = pos; posGlobal = convertToGlobalPosition(this); }
+    virtual void setPosition(float x, float y) { posRelative.x = x; posRelative.y = y; posGlobal = convertToGlobalPosition(this); }
+    virtual void setPositionX(float x) { posRelative.x = x; posGlobal = convertToGlobalPosition(this); }
+    virtual void setPositionY(float y) { posRelative.y = y; posGlobal = convertToGlobalPosition(this); }
     // # ISSUE : getPosition only can get the first set position, when use setVelocity to change GameObject's positon,
     //                   it cannot get the updated position
     //                   so currently if want it to return correct value, please use setPosition to change GameObject's position
-    AEVec2 getPosition() { return posRelative; }
-    float getPositionX() { return posRelative.x; }
-    float getPositionY() { return posRelative.y; }
+    virtual AEVec2 getPosition() { return posRelative; }
+    virtual float getPositionX() { return posRelative.x; }
+    virtual float getPositionY() { return posRelative.y; }
     // position in global
-    void setRealPosition(float x, float y) { posGlobal.x = x; posGlobal.y = y; }
-    void setRealPosition(AEVec2 pos) { posGlobal = pos; }
-    AEVec2 getRealPosition() { return posGlobal; }
+    virtual void setRealPositionX(float x) { posGlobal.x = x; }
+    virtual void setRealPositionY(float y) { posGlobal.y = y; }
+    virtual void setRealPosition(float x, float y) { posGlobal.x = x; posGlobal.y = y; }
+    virtual void setRealPosition(AEVec2 pos) { posGlobal = pos; }
+    virtual float getRealPositionX() { return posGlobal.x; }
+    virtual float getRealPositionY() { return posGlobal.y; }
+    virtual AEVec2 getRealPosition() { return posGlobal; }
     // ×ø±ê×ª»¯
     AEVec2 convertToGlobalPosition(GameObject *go) {
         auto parent = go->getParent();
@@ -85,8 +89,8 @@ public:
     void setVelocity(float x, float y) { velCurr.x = x; velCurr.y = y; }
     AEVec2 getVelocity() { return velCurr; }
 
-    void setDirection(float dir) { dirCurr = dir; }
-    float getDirection() { return dirCurr; }
+    virtual void setDirection(float dir) { dirCurr = dir; }
+    virtual float getDirection() { return dirCurr; }
 
     void setMesh(AEGfxVertexList* mesh) {
         if (pMesh) {

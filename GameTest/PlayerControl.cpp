@@ -1,4 +1,4 @@
-#include "myAbility.h"
+#include "PlayerControl.h"
 
 #include "MapController.h"
 
@@ -8,6 +8,8 @@ PlayerAI
 // ÔË¶¯Æ«ÒÆ
 const int deltaX[5] = { 0, 0, 0, -1, 1 };
 const int deltaY[5] = { 0, -1, 1, 0, 0 };
+// Ðý×ª
+const float deltaRotate[5] = { 1.57, -1.57, 1.57, -3.14, 0 };
 
 PlayerControl::PlayerControl() {}
 PlayerControl::~PlayerControl() {}
@@ -77,6 +79,7 @@ void PlayerControl::update() {
             }
             curDirection = nextDirection;
             nextDirection = 0;
+            this->getOwner()->setDirection(deltaRotate[curDirection]);
         }
     }
 

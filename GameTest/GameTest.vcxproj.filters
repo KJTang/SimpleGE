@@ -90,9 +90,6 @@
     <ClInclude Include="Ability.h">
       <Filter>Header Files\SimpleGE</Filter>
     </ClInclude>
-    <ClInclude Include="myAbility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Macros.h">
       <Filter>Header Files\SimpleGE</Filter>
     </ClInclude>
@@ -144,6 +141,9 @@
     <ClInclude Include="SoundController.h">
       <Filter>Header Files\SimpleGE</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
@@ -180,9 +180,6 @@
     <ClCompile Include="Ability.cpp">
       <Filter>Source Files\SimpleGE</Filter>
     </ClCompile>
-    <ClCompile Include="myAbility.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\SimpleGE</Filter>
     </ClCompile>
@@ -197,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="SoundController.cpp">
       <Filter>Source Files\SimpleGE</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerControl.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

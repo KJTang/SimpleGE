@@ -24,4 +24,9 @@ public:
     virtual void update();
 
     void setSize(float size);
+    void setPositionX(float x);
+    void setPositionY(float y);
+    void setPosition(float x, float y);
+
+    void setDirection(float d);
 };

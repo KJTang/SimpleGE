@@ -1,6 +1,4 @@
-//#pragma once
-#ifndef MY_ABILITY_H
-#define MY_ABILITY_H
+#pragma once
 
 #include <queue>
 #include "SimpleGE.h"
@@ -65,5 +63,3 @@ public:
         ++count;
     }
 };
-
-#endif

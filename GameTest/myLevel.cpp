@@ -1,6 +1,6 @@
 #include "myLevel.h"
 #include "myObject.h"
-#include "myAbility.h"
+#include "PlayerControl.h"
 #include "MonsterAI.h"
 #include "MapController.h"
 
@@ -53,18 +53,7 @@ bool LevelOne::init() {
     }
     count = 0;
 
-    SoundController::getInstance()->playMusic("music/test.mp3");
-    /********************
-    TKJ
-    *******************/
-    //auto ani = Animation::create();
-    //this->addChild(ani);
-    //ani->addFrame("animation01.png");
-    //ani->addFrame("animation02.png");
-    //ani->addFrame("animation03.png");
-    //ani->start(0.5, -1);
-    //ani->setSize(20);
-    //ani->setPosition(100, 100);
+    //SoundController::getInstance()->playMusic("music/test.mp3");
 
     /********************
     DPW
@@ -72,15 +61,14 @@ bool LevelOne::init() {
     auto mapLayer = GameObject::create();
     this->addChild(mapLayer, "mapLayer");
     MapController::getInstance()->createMapFromFile("wdp2.txt", mapLayer);
-    auto player = GameObject::create("bean.png");
+    auto player = Animation::create();
     this->addChild(player, "player");
+    player->addFrame("picture/player/player1.png");
+    player->addFrame("picture/player/player2.png");
+    player->start(0.5, -1);
     player->addAbility(PlayerControl::create(player));
     player->setPosition(MapController::getInstance()->getXPositionInWorld(6), MapController::getInstance()->getYPositionInWorld(1));
-    //player->setPosition(0, 0);
     player->setSize(10);
-    //int flag = MapController::getInstance()->getObjectType(player);
-    //if (flag)
-    //	GameLog("collision");
 
     /********************
     LJD

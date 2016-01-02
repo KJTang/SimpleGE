@@ -64,3 +64,29 @@ void Animation::setSize(float size) {
         (*it)->setSize(size);
     }
 }
+
+void Animation::setPositionX(float x) {
+    GameObject::setPositionX(x);
+    for (auto it = AnimationFrame.begin(); it != AnimationFrame.end(); ++it) {
+        (*it)->setRealPositionX(this->getRealPositionX());
+    }
+}
+
+void Animation::setPositionY(float y) {
+    GameObject::setPositionY(y);
+    for (auto it = AnimationFrame.begin(); it != AnimationFrame.end(); ++it) {
+        (*it)->setRealPositionY(this->getRealPositionY());
+    }
+}
+
+void Animation::setPosition(float x, float y) {
+    this->setPositionX(x);
+    this->setPositionY(y);
+}
+
+void Animation::setDirection(float d) {
+    GameObject::setDirection(d);
+    for (auto it = AnimationFrame.begin(); it != AnimationFrame.end(); ++it) {
+        (*it)->setDirection(d);
+    }
+}
