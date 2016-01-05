@@ -196,3 +196,12 @@ void GameObject::removeAbility(const std::string& name) {
         }
     }
 }
+
+Ability* GameObject::getAbility(const std::string& name) {
+    for (auto it = abilities.begin(); it != abilities.end(); ++it) {
+        if ((*it)->getName() == name) {
+            return (*it);
+        }
+    }
+}
+

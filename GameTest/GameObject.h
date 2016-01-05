@@ -129,6 +129,7 @@ public:
     // abilities
     int getAbilityCount() { return abilities.size(); }
     void addAbility(Ability* ab);
-    void removeAbility(const std::string& name);
+    void removeAbility(const std::string &name);
+    Ability* getAbility(const std::string &name);
     const vector<Ability*>& getAbilities() { return abilities; }
 };

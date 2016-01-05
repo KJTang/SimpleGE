@@ -1,6 +1,9 @@
 #include "MonsterAI.h"
-#include "PathGenerator.h"
+
 #include <time.h>
+
+#include "PathGenerator.h"
+#include "PlayerControl.h"
 
 /**************
 MonsterAI
@@ -52,6 +55,8 @@ void MonsterAI::update() {
         this->start = this->nextPos;
         this->path.Clear();
         //更新player位置和地图信息
+        int playerState = static_cast<PlayerControl*>(player->getAbility("PlayerControl"))->getPlayerState();
+        printf("fuck me %d\n", playerState);
         this->end.posY = MapController::getInstance()->getXPositionInMap(player->getPositionX());
         this->end.posX = MapController::getInstance()->getYPositionInMap(player->getPositionY());
         this->setMapInfo(MapController::getInstance()->mapInfo);
