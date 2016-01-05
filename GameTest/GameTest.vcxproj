@@ -74,11 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-<<<<<<< HEAD
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-=======
       <PreprocessorDefinitions>严重性	代码	说明	项目	文件	行;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
->>>>>>> 6796733aa2a52888b87f31c25ddc3386c9ffd7c7
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
