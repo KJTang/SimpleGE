@@ -1,6 +1,7 @@
 #include "PlayerControl.h"
 
 #include "MapController.h"
+#include "Animation.h"
 
 /**************
 PlayerAI
@@ -25,6 +26,9 @@ bool PlayerControl::init(GameObject* owner) {
         return false;
     }
     this->setName("PlayerControl");
+    _playerState = 0; // '0' for 'normal'
+    count = 0;
+
     speed = 1;
     curDirection = nextDirection = 0;
     beans = 0;
@@ -85,6 +89,14 @@ void PlayerControl::update() {
 
     // eat beans
     this->eatBeans();
+    if (_playerState == 1) {
+        ++count;
+        if (count >= CONST_FPS * 3) {
+            count = 0;
+            _playerState = 0;
+            static_cast<Animation*>(this->getOwner())->setSize(10);
+        }
+    }
 }
 
 void PlayerControl::onKeyDown(int direction) {
@@ -211,5 +223,9 @@ void PlayerControl::eatBeans() {
         ++beans;
         bean->removeFromParent();
         printf("Have Ate Beans: %d\n", beans);
+        if (MapController::getInstance()->getObjectType(curX, curY) == 3) { // ≥‘µΩ¥Û¡¶∂π
+            _playerState = 1;
+            static_cast<Animation*>(this->getOwner())->setSize(12.5);
+        }
     }
 }

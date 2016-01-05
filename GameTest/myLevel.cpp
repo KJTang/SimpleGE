@@ -5,7 +5,6 @@
 #include "MapController.h"
 
 /********************
-<<<<<<< HEAD
 WQY
 *********************/
 bool LevelZero::init() {
@@ -104,8 +103,6 @@ void LevelZero::update() {
 }
 
 /********************
-=======
->>>>>>> 6796733aa2a52888b87f31c25ddc3386c9ffd7c7
 Loading Level
 *******************/
 LoadingLevel::LoadingLevel() {}
@@ -166,7 +163,7 @@ bool LevelOne::init() {
     this->addChild(player, "player");
     player->addFrame("picture/player/player1.png");
     player->addFrame("picture/player/player2.png");
-    player->start(0.5, -1);
+    player->start(0.1, -1);
     player->addAbility(PlayerControl::create(player));
     player->setPosition(MapController::getInstance()->getXPositionInWorld(6), MapController::getInstance()->getYPositionInWorld(1));
     player->setSize(10);
@@ -311,7 +308,7 @@ void LevelGameInfo::update() {
     
     if (AEInputCheckCurr(VK_SPACE))
     {
-        SystemController::getInstance()->setNextLevel(LevelOne::create());
+        SystemController::getInstance()->setNextLevel(LoadingLevel::create());
     }
     count++;
 }
