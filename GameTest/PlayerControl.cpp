@@ -1,8 +1,10 @@
 #include "PlayerControl.h"
 
+#include"myLevel.h"
 #include "MapController.h"
 #include "Animation.h"
 
+#define WINNUM 300
 /**************
 PlayerAI
 ***************/
@@ -227,5 +229,8 @@ void PlayerControl::eatBeans() {
             _playerState = 1;
             static_cast<Animation*>(this->getOwner())->setSize(12.5);
         }
+    }
+    if (beans==WINNUM) {
+        SystemController::getInstance()->setNextLevel(LevelSuccess::create());
     }
 }

@@ -126,15 +126,15 @@ public:
     virtual void update();
 };
 
-class LevelFaile :public Level {
+class LevelFail :public Level {
 private:
     GameObject *go;
     std::vector<GameObject *> choice;
 public:
-    LevelFaile() {}
-    ~LevelFaile() {}
+    LevelFail() {}
+    ~LevelFail() {}
 
-    CREATE_FUNC(LevelSuccess);
+    CREATE_FUNC(LevelFail);
 
     virtual bool init();
     virtual void update();

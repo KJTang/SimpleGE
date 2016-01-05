@@ -2,6 +2,7 @@
 
 #include <time.h>
 
+#include"myLevel.h"
 #include "PathGenerator.h"
 #include "PlayerControl.h"
 
@@ -48,15 +49,24 @@ void MonsterAI::update() {
     if ((player != NULL) &&
         this->curPos.posX == MapController::getInstance()->getYPositionInMap(player->getPositionY()) &&
         this->curPos.posY == MapController::getInstance()->getXPositionInMap(player->getPositionX())) {
-        this->player = NULL;
-        printf("find it\n");
+        //this->player = NULL;
+
+        int playerState = static_cast<PlayerControl*>(player->getAbility("PlayerControl"))->getPlayerState();
+        printf("------------------------ %d\n", playerState);
+        if (playerState == 0) {
+            SystemController::getInstance()->setNextLevel(LevelFail::create());
+            printf("tuanzhangshishabi\n");
+        }
+        else if (playerState == 1) {
+            printf("wangdepinshishabi\n");
+            owner->removeFromParent();
+            return;
+        }
     }
     if ((this->count % 400) == 0 && (this->player != NULL) && (this->flag == 0 || this->flag == 1)) {
         this->start = this->nextPos;
         this->path.Clear();
         //更新player位置和地图信息
-        int playerState = static_cast<PlayerControl*>(player->getAbility("PlayerControl"))->getPlayerState();
-        printf("fuck me %d\n", playerState);
         this->end.posY = MapController::getInstance()->getXPositionInMap(player->getPositionX());
         this->end.posX = MapController::getInstance()->getYPositionInMap(player->getPositionY());
         this->setMapInfo(MapController::getInstance()->mapInfo);

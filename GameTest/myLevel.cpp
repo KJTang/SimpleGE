@@ -151,7 +151,7 @@ bool LevelOne::init() {
     }
     count = 0;
 
-    //SoundController::getInstance()->playMusic("music/test.mp3");
+    SoundController::getInstance()->playMusic("music/test.mp3");
 
     /********************
     DPW
@@ -425,12 +425,12 @@ void LevelSuccess::update() {
 /************
 LevelFaile
 **************/
-bool LevelFaile::init() {
+bool LevelFail::init() {
     if (!Level::init()) {
         return false;
     }
 
-    auto mainManu = GameObject::create("picture/level/Faile.png");
+    auto mainManu = GameObject::create("picture/level/Fail.png");
     this->addChild(mainManu);
     mainManu->setPositionX(0.0);
     mainManu->setPositionY(0.0);
@@ -460,10 +460,9 @@ bool LevelFaile::init() {
     cursor->setName("cursor");
 
     return true;
-
 }
 
-void LevelFaile::update() {
+void LevelFail::update() {
     Level::update();
 
     auto owner = this->getChildByName("cursor");

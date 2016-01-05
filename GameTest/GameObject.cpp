@@ -58,7 +58,6 @@ bool GameObject::init(const std::string &textureName) {
     this->setDirection(0.0f);
 
     texture = AEGfxTextureLoad(textureName.c_str());
-
     return true;
 }
 
