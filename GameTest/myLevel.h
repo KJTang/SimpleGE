@@ -2,6 +2,7 @@
 
 #include "SimpleGE.h"
 
+<<<<<<< HEAD
 /**************
 WQY
 *************/
@@ -26,6 +27,9 @@ public:
 };
 
 class LoadingLevel :public Level {
+=======
+class LoadingLevel : public Level {
+>>>>>>> 6796733aa2a52888b87f31c25ddc3386c9ffd7c7
 private:
     int count;
     bool quit;
@@ -79,6 +83,7 @@ public:
 
     virtual bool init();
     virtual void update();
+<<<<<<< HEAD
 };
 
 /************
@@ -137,4 +142,6 @@ public:
 
 	virtual bool init();
 	virtual void update();
+=======
+>>>>>>> 6796733aa2a52888b87f31c25ddc3386c9ffd7c7
 };

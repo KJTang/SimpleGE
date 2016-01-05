@@ -5,6 +5,7 @@
 #include "MapController.h"
 
 /********************
+<<<<<<< HEAD
 WQY
 *********************/
 bool LevelZero::init() {
@@ -103,6 +104,8 @@ void LevelZero::update() {
 }
 
 /********************
+=======
+>>>>>>> 6796733aa2a52888b87f31c25ddc3386c9ffd7c7
 Loading Level
 *******************/
 LoadingLevel::LoadingLevel() {}
@@ -171,6 +174,7 @@ bool LevelOne::init() {
     /********************
     LJD
     *******************/
+<<<<<<< HEAD
 	/*auto monester1 = Animation::create();
 	this->addChild(monester1, "monester1");
 	monester1->addFrame("picture/player/fire1.png");
@@ -195,6 +199,15 @@ bool LevelOne::init() {
     this->addChild(monster2);
     monster2->addAbility(MonsterAI::create(monster2));
     auto monster3 = GameObject::create("picture/player/fire2.png");
+=======
+    auto monster = GameObject::create("test.png");
+    this->addChild(monster);
+    monster->addAbility(MonsterAI::create(monster));
+    auto monster2 = GameObject::create("test.png");
+    this->addChild(monster2);
+    monster2->addAbility(MonsterAI::create(monster2));
+    auto monster3 = GameObject::create("test.png");
+>>>>>>> 6796733aa2a52888b87f31c25ddc3386c9ffd7c7
     this->addChild(monster3);
     monster3->addAbility(MonsterAI::create(monster3));
 
@@ -277,6 +290,7 @@ void LevelThree::update() {
     }
     ++count;
 }
+<<<<<<< HEAD
 
 /*************
 WDP
@@ -504,3 +518,5 @@ void LevelFaile::update() {
 		}
 	}
 }
+=======
+>>>>>>> 6796733aa2a52888b87f31c25ddc3386c9ffd7c7
