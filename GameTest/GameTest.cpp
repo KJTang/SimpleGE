@@ -14,8 +14,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     system->init(hInstance, nCmdShow);
 
     // Level One
+    auto level = LevelZero::create();
+    //auto level = LevelSuccess::create();
+    //auto level = LevelFaile::create();
+
     //auto level = LevelOne::create();
-    auto level = LoadingLevel::create();
+    //auto level = LoadingLevel::create();
     system->setCurrentLevel(level);
 
     // GameStart
