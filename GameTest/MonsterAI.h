@@ -3,9 +3,6 @@
 #include "SimpleGE.h"
 #include "PathGenerator.h"
 
-const int DISTANCE = 10;
-
-
 class MonsterAI : public Ability {
 private:
 	int count, randtime, flag;

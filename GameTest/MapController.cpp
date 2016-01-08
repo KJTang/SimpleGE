@@ -14,6 +14,8 @@ bool MapController::init() {
 
 bool MapController::createMapFromFile(char* filename, GameObject* layer)
 {
+    int beanCount = 0;
+
     auto beanLayer = layer->getChildByName("beanLayer");
     if (!beanLayer) {
         beanLayer = GameObject::create();
@@ -61,6 +63,8 @@ bool MapController::createMapFromFile(char* filename, GameObject* layer)
                 map_obj->setPosition((j - width / 2) * 20.0, (i - length / 2) * -20.0);
                 //map_obj->setActive(false);
                 map_obj->setSize(5);
+
+                ++beanCount;
             }
             else if (mapInfo[i][j] == 3) // ´óÁ¦¶¹
             {
@@ -71,9 +75,12 @@ bool MapController::createMapFromFile(char* filename, GameObject* layer)
                 map_obj->setPosition((j - width / 2) * 20.0, (i - length / 2) * -20.0);
                 //map_obj->setActive(false);
                 map_obj->setSize(5);
+
+                ++beanCount;
             }
         }
     }
+    //printf("--- %d", beanCount);
 
     return true;
 }

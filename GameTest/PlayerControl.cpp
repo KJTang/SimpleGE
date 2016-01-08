@@ -5,8 +5,8 @@
 #include "MapController.h"
 #include "SoundController.h"
 
-const int WINNUM = 100;
-const float SUPER_TIME = 5;
+const int WINNUM = 230;
+const float SUPER_TIME = 3.5;
 
 // ÔË¶¯Æ«ÒÆ
 const int deltaX[5] = { 0, 0, 0, -1, 1 };

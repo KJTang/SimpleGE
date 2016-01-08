@@ -6,9 +6,8 @@
 #include "PathGenerator.h"
 #include "PlayerControl.h"
 
-/**************
-MonsterAI
-***************/
+const int DISTANCE = 15;
+
 MonsterAI::MonsterAI() {}
 MonsterAI::~MonsterAI() {}
 
