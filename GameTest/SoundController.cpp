@@ -30,16 +30,8 @@ bool SoundController::init() {
         return false;
     }
 
-    //musicThread = new std::thread(&SoundController::mainLoop, this);
-    //musicThread->detach();
     return true;
 }
-
-//void SoundController::mainLoop() {
-//    while (!quit) {
-//        Sleep(50);
-//    }
-//}
 
 bool SoundController::loadMusic(const std::string &filename, void(*callback)(void *d), void *data) {
     FMOD::Sound *sound = nullptr;
@@ -57,7 +49,8 @@ bool SoundController::loadMusic(const std::string &filename, void(*callback)(voi
 
 bool SoundController::playMusic(const std::string &filename, bool loop) {
     auto it = loadedSounds.find(filename);
-    if (it == loadedSounds.end()) {
+    auto it2 = playingSounds.find(filename);
+    if (it == loadedSounds.end() || it2 != playingSounds.end()) {
         return false;
     }
     if (loop) {
@@ -78,15 +71,28 @@ bool SoundController::pauseMusic(const std::string &filename) {
         return false;
     }
     (*it).second->setPaused(true);
+    playingSounds.erase(filename);
+    return true;
+}
+
+bool SoundController::pauseAllMusic() {
+    for (auto it = playingSounds.begin(); it != playingSounds.end(); ++it) {
+        (*it).second->setPaused(true);
+    }
+    playingSounds.clear();
     return true;
 }
 
 bool SoundController::resumeMusic(const std::string &filename) {
     auto it = playingSounds.find(filename);
-    if (it == playingSounds.end()) {
+    if (it != playingSounds.end()) {
         return false;
     }
-    (*it).second->setPaused(false);
+    auto it2 = loadedSounds.find(filename);
+    if (it2 == loadedSounds.end()) {
+        return false;
+    }
+    playMusic(filename);
     return true;
 }
 

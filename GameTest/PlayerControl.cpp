@@ -1,13 +1,13 @@
 #include "PlayerControl.h"
 
+#include "Animation.h"
 #include"myLevel.h"
 #include "MapController.h"
-#include "Animation.h"
+#include "SoundController.h"
 
-#define WINNUM 300
-/**************
-PlayerAI
-***************/
+const int WINNUM = 100;
+const float SUPER_TIME = 4;
+
 // 运动偏移
 const int deltaX[5] = { 0, 0, 0, -1, 1 };
 const int deltaY[5] = { 0, -1, 1, 0, 0 };
@@ -31,7 +31,7 @@ bool PlayerControl::init(GameObject* owner) {
     _playerState = 0; // '0' for 'normal'
     count = 0;
 
-    speed = 1;
+    speed = 1.5;
     curDirection = nextDirection = 0;
     beans = 0;
 
@@ -93,7 +93,7 @@ void PlayerControl::update() {
     this->eatBeans();
     if (_playerState == 1) {
         ++count;
-        if (count >= CONST_FPS * 3) {
+        if (count >= CONST_FPS * SUPER_TIME) {
             count = 0;
             _playerState = 0;
             static_cast<Animation*>(this->getOwner())->setSize(10);
@@ -174,7 +174,7 @@ void PlayerControl::getCollisionPoint(int direction, float &x, float &y) {
 void PlayerControl::getCollisionPoint(int direction, float &x1, float &y1, float &x2, float &y2) {
     float curX = this->getOwner()->getPositionX();
     float curY = this->getOwner()->getPositionY();
-    float delta = 1.0f;
+    float delta = 1.5f;
     switch (direction) {
         case DOWN:
         {
@@ -225,6 +225,7 @@ void PlayerControl::eatBeans() {
         ++beans;
         bean->removeFromParent();
         printf("Have Ate Beans: %d\n", beans);
+        SoundController::getInstance()->playMusic("music/eat.wav");
         if (MapController::getInstance()->getObjectType(curX, curY) == 3) { // 吃到大力豆
             _playerState = 1;
             static_cast<Animation*>(this->getOwner())->setSize(12.5);

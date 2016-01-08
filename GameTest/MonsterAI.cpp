@@ -52,13 +52,21 @@ void MonsterAI::update() {
         //this->player = NULL;
 
         int playerState = static_cast<PlayerControl*>(player->getAbility("PlayerControl"))->getPlayerState();
-        printf("------------------------ %d\n", playerState);
         if (playerState == 0) {
+            player->setVisible(false);
             SystemController::getInstance()->setNextLevel(LevelFail::create());
-            printf("tuanzhangshishabi\n");
+            return;
         }
         else if (playerState == 1) {
-            printf("wangdepinshishabi\n");
+            //printf("create new monster\n");
+
+            auto monster = Animation::create();
+            this->getOwner()->getParent()->addChild(monster);
+            monster->addFrame("picture/monster/fire1.png");
+            monster->addFrame("picture/monster/fire2.png");
+            monster->start(0.1, -1);
+            monster->addAbility(MonsterAI::create(monster));
+
             owner->removeFromParent();
             return;
         }
@@ -76,12 +84,12 @@ void MonsterAI::update() {
             this->flag == 0) {
             PathGenerator::getInstance()->BFSPath(this->map, this->start, this->end, this->path);
             this->flag = 1;
-            printf("\nflag = 1,BFS\n");
+            //printf("\nflag = 1,BFS\n");
         }
         else {
             PathGenerator::getInstance()->DFSPath(this->map, this->start, this->end, this->path);
             this->flag = 0;
-            printf("\nflag = 0,DFS\n");
+            //printf("\nflag = 0,DFS\n");
         }
         if (!this->path.Empty()) {
             this->path.Pop(this->nextPos);
@@ -104,7 +112,7 @@ void MonsterAI::update() {
                     this->end = { 10,20 };
                     this->setMapInfo(MapController::getInstance()->mapInfo);
                     PathGenerator::getInstance()->BFSPath(this->map, this->start, this->end, this->path);
-                    printf("flag = 2,BFS\n");
+                    //printf("flag = 2,BFS\n");
                     this->curPos = this->nextPos;
                     if (!this->path.Empty()) {
                         this->path.Pop(this->nextPos);
@@ -125,14 +133,14 @@ void MonsterAI::update() {
                 if (this->flag == 2) {
                     PathGenerator::getInstance()->DFSPath(this->map, this->start, this->end, this->path);
                     this->flag++;
-                    printf("\nrestrat,DFS\n");
+                    //printf("\nrestrat,DFS\n");
                 }
                 else {
                     PathGenerator::getInstance()->BFSPath(this->map, this->start, this->end, this->path);
                     if (this->flag == 5) {
                         this->flag = 2;
                     }
-                    printf("\nrestrat,BFS\n");
+                    //printf("\nrestrat,BFS\n");
                 }
                 if (!this->path.Empty()) {
                     this->path.Pop(this->nextPos);

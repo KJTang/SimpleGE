@@ -46,7 +46,7 @@ bool MapController::createMapFromFile(char* filename, GameObject* layer)
         {
             if (mapInfo[i][j] == 1) // Ç½
             {
-                auto map_obj = GameObject::create("wall.png");
+                auto map_obj = GameObject::create("picture/map/wall.png");
                 wallLayer->addChild(map_obj);
                 map_obj->setPosition((j - width / 2) * 20.0, (i - length / 2) * -20.0);
                 //map_obj->setActive(false);
@@ -54,7 +54,7 @@ bool MapController::createMapFromFile(char* filename, GameObject* layer)
             }
             else if (mapInfo[i][j] == 2) // ¶¹×Ó
             {
-                auto map_obj = GameObject::create("bean.png");
+                auto map_obj = GameObject::create("picture/map/bean.png");
                 char name[10];
                 sprintf(name, "(%d, %d)", j, i);
                 beanLayer->addChild(map_obj, name);
@@ -64,7 +64,7 @@ bool MapController::createMapFromFile(char* filename, GameObject* layer)
             }
             else if (mapInfo[i][j] == 3) // ´óÁ¦¶¹
             {
-                auto map_obj = GameObject::create("test.png");
+                auto map_obj = GameObject::create("picture/test.png");
                 char name[10];
                 sprintf(name, "(%d, %d)", j, i);
                 beanLayer->addChild(map_obj, name);

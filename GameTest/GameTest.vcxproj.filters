@@ -199,33 +199,4 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="animation01.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="animation02.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="animation03.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="bean.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="test.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="test1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="test2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="wall.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="wdp.txt" />
-  </ItemGroup>
 </Project>

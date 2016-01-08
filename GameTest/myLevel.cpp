@@ -11,6 +11,8 @@ bool LevelZero::init() {
     if (!Level::init())
         return false;
 
+    SoundController::getInstance()->pauseAllMusic();
+
     count = 1;
     auto mainManu = GameObject::create("picture/level/GameMenu.png");
     this->addChild(mainManu);
@@ -42,9 +44,10 @@ bool LevelZero::init() {
     subMenu4->setSize(SIZE);
     this->addChild(subMenu4);
 
-    go = GameObject::create("test.png");
+    go = GameObject::create("picture/level/cursor.png");
     go->setPositionX(X0);
-    go->setPositionY(dY);
+    go->setPositionY(Y0+dY);
+    go->setSize(SIZE);
     this->addChild(go);
 
     return true;
@@ -56,7 +59,6 @@ void LevelZero::update() {
     {
         if (count == 1)
         {
-            GameLog("LevelChange: LevelZreoto LevelOne");
             SystemController::getInstance()->setNextLevel(LevelGameInfo::create());
         }
         else if (count == 3)
@@ -76,14 +78,14 @@ void LevelZero::update() {
     {
         count *= 2;
         auto pos = go->getPosition();
-        pos.y = -dY;
+        pos.y -= 2*dY;
         go->setPosition(pos);
     }
     else if (AEInputCheckCurr(VK_UP) && (count == 2 || count == 6))
     {
         count /= 2;
         auto pos = go->getPosition();
-        pos.y = dY;
+        pos.y += 2*dY;
         go->setPosition(pos);
     }
     else if (AEInputCheckCurr(VK_RIGHT) && (count == 1 || count == 2))
@@ -125,8 +127,10 @@ bool LoadingLevel::init() {
     loading->start(0.05, -1);
     loading->setSize(50);
     loading->setPosition(0, 0);
-    
-    SoundController::getInstance()->loadMusic("music/test.mp3", [](void *data) {memset(data, 1, sizeof(bool)); }, (void*)(&quit));
+
+    // load sound
+    SoundController::getInstance()->loadMusic("music/eat.wav");
+    SoundController::getInstance()->loadMusic("music/bgm.mp3", [](void *data) {memset(data, 1, sizeof(bool)); }, (void*)(&quit));
 
     return true;
 }
@@ -134,7 +138,7 @@ bool LoadingLevel::init() {
 void LoadingLevel::update() {
     if (count++ >= 60) {
         if (quit) {
-            SystemController::getInstance()->setNextLevel(LevelOne::create());
+            SystemController::getInstance()->setNextLevel(LevelZero::create());
         }
     }
 }
@@ -151,52 +155,46 @@ bool LevelOne::init() {
     }
     count = 0;
 
-    SoundController::getInstance()->playMusic("music/test.mp3");
+    SoundController::getInstance()->playMusic("music/bgm.mp3");
 
     /********************
     DPW
     *******************/
     auto mapLayer = GameObject::create();
     this->addChild(mapLayer, "mapLayer");
-    MapController::getInstance()->createMapFromFile("wdp2.txt", mapLayer);
+    MapController::getInstance()->createMapFromFile("map/map01.txt", mapLayer);
     auto player = Animation::create();
     this->addChild(player, "player");
     player->addFrame("picture/player/player1.png");
     player->addFrame("picture/player/player2.png");
     player->start(0.1, -1);
     player->addAbility(PlayerControl::create(player));
-    player->setPosition(MapController::getInstance()->getXPositionInWorld(6), MapController::getInstance()->getYPositionInWorld(1));
+    player->setPosition(MapController::getInstance()->getXPositionInWorld(6), MapController::getInstance()->getYPositionInWorld(3));
     player->setSize(10);
 
     /********************
     LJD
     *******************/
 
-    /*auto monester1 = Animation::create();
-    this->addChild(monester1, "monester1");
-    monester1->addFrame("picture/player/fire1.png");
-    monester1->addFrame("picture/player/fire2.png");
-    monester1->addAbility(MonsterAI::create(monester1));
+    auto monster1 = Animation::create();
+    this->addChild(monster1, "monster1");
+    monster1->addFrame("picture/monster/fire1.png");
+    monster1->addFrame("picture/monster/fire2.png");
+    monster1->start(0.1, -1);
+    monster1->addAbility(MonsterAI::create(monster1));
 
-    auto monester2 = Animation::create();
-    this->addChild(monester2, "monester2");
-    monester2->addFrame("picture/player/fire1.png");
-    monester2->addFrame("picture/player/fire2.png");
-    monester2->addAbility(MonsterAI::create(monester2));
-
-    auto monester3 = Animation::create();
-    this->addChild(monester3, "monester1");
-    monester3->addFrame("picture/player/fire1.png");
-    monester3->addFrame("picture/player/fire2.png");
-    monester3->addAbility(MonsterAI::create(monester3));*/
-    auto monster = GameObject::create("picture/player/fire1.png");
-    this->addChild(monster);
-    monster->addAbility(MonsterAI::create(monster));
-    auto monster2 = GameObject::create("picture/player/fire2.png");
-    this->addChild(monster2);
+    auto monster2 = Animation::create();
+    this->addChild(monster2, "monster2");
+    monster2->addFrame("picture/monster/fire1.png");
+    monster2->addFrame("picture/monster/fire2.png");
+    monster2->start(0.1, -1);
     monster2->addAbility(MonsterAI::create(monster2));
-    auto monster3 = GameObject::create("picture/player/fire2.png");
-    this->addChild(monster3);
+
+    auto monster3 = Animation::create();
+    this->addChild(monster3, "monster3");
+    monster3->addFrame("picture/monster/fire1.png");
+    monster3->addFrame("picture/monster/fire2.png");
+    monster3->start(0.1, -1);
     monster3->addAbility(MonsterAI::create(monster3));
 
     return true;
@@ -223,9 +221,9 @@ bool LevelTwo::init() {
     }
     count = 0;
 
-    auto go = GameObject::create("test.png");
+    auto go = GameObject::create("picture/test.png");
     this->addChild(go);
-    auto go2 = GameObject::create("test.png");
+    auto go2 = GameObject::create("picture/test.png");
     this->addChild(go2);
     auto pos = go2->getPosition();
     pos.y += 10;
@@ -257,7 +255,7 @@ bool LevelThree::init() {
     }
     count = 0;
 
-    auto go = GameObject::create("test.png");
+    auto go = GameObject::create("picture/test.png");
     this->addChild(go);
     auto pos = go->getPosition();
     pos.x += 10;
@@ -308,7 +306,7 @@ void LevelGameInfo::update() {
     
     if (AEInputCheckCurr(VK_SPACE))
     {
-        SystemController::getInstance()->setNextLevel(LoadingLevel::create());
+        SystemController::getInstance()->setNextLevel(LevelOne::create());
     }
     count++;
 }
@@ -368,7 +366,7 @@ bool LevelSuccess::init() {
     this->addChild(subMenu2);
     choice.push_back(subMenu2);
 
-    auto cursor = GameObject::create("test.png");
+    auto cursor = GameObject::create("picture/test.png");
     this->addChild(cursor);
     cursor->setPositionX(250);
     cursor->setPositionY(0.0);
@@ -415,15 +413,15 @@ void LevelSuccess::update() {
         }
         std::string myName = choLevel->getName();
         if (myName == "backGame")
-            SystemController::getInstance()->setNextLevel(LevelZero::create());
+            SystemController::getInstance()->setNextLevel(LevelOne::create());
         else if (myName == "exitGame") {
-            SystemController::getInstance()->quitGame();
+            SystemController::getInstance()->setNextLevel(LevelZero::create());
         }
     }
 }
 
 /************
-LevelFaile
+LevelFail
 **************/
 bool LevelFail::init() {
     if (!Level::init()) {
@@ -452,7 +450,7 @@ bool LevelFail::init() {
     this->addChild(subMenu2);
     choice.push_back(subMenu2);
 
-    auto cursor = GameObject::create("test.png");
+    auto cursor = GameObject::create("picture/test.png");
     this->addChild(cursor);
     cursor->setPositionX(250);
     cursor->setPositionY(0);
@@ -500,7 +498,7 @@ void LevelFail::update() {
         if (myName == "backGame")
             SystemController::getInstance()->setNextLevel(LevelOne::create());
         else if (myName == "exitGame") {
-            SystemController::getInstance()->quitGame();
+            SystemController::getInstance()->setNextLevel(LevelZero::create());
         }
     }
 }

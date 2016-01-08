@@ -31,6 +31,7 @@ public:
     bool loadMusic(const std::string &filename, void (*callback)(void *d) = nullptr, void *data = nullptr);
     bool playMusic(const std::string &filename, bool loop = false);
     bool pauseMusic(const std::string &filename);
+    bool pauseAllMusic();
     bool resumeMusic(const std::string &filename);
 
     bool releaseMusic(const std::string &filename);

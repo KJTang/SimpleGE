@@ -188,19 +188,6 @@
     <ClCompile Include="SoundController.cpp" />
     <ClCompile Include="SystemController.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="animation01.png" />
-    <Image Include="animation02.png" />
-    <Image Include="animation03.png" />
-    <Image Include="bean.png" />
-    <Image Include="test.png" />
-    <Image Include="test1.png" />
-    <Image Include="test2.png" />
-    <Image Include="wall.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="wdp.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
