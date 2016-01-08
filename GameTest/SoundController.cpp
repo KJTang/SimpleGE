@@ -49,10 +49,19 @@ bool SoundController::loadMusic(const std::string &filename, void(*callback)(voi
 
 bool SoundController::playMusic(const std::string &filename, bool loop) {
     auto it = loadedSounds.find(filename);
-    auto it2 = playingSounds.find(filename);
-    if (it == loadedSounds.end() || it2 != playingSounds.end()) {
+    if (it == loadedSounds.end()) { // no music has this name
         return false;
     }
+
+    auto it2 = playingSounds.find(filename);
+    if (it2 != playingSounds.end()) {
+        bool isplaying = true;
+        (*it2).second->isPlaying(&isplaying);
+        if (isplaying == true) { // already playing
+            return false;
+        }
+    }
+
     if (loop) {
         (*it).second->setMode(FMOD_LOOP_NORMAL);
     }
