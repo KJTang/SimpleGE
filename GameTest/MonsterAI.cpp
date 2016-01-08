@@ -58,15 +58,7 @@ void MonsterAI::update() {
             return;
         }
         else if (playerState == 1) {
-            //printf("create new monster\n");
-
-            auto monster = Animation::create();
-            this->getOwner()->getParent()->addChild(monster);
-            monster->addFrame("picture/monster/fire1.png");
-            monster->addFrame("picture/monster/fire2.png");
-            monster->start(0.1, -1);
-            monster->addAbility(MonsterAI::create(monster));
-
+            static_cast<LevelOne*>(this->getOwner()->getParent())->minusMonster();
             owner->removeFromParent();
             return;
         }

@@ -172,41 +172,33 @@ bool LevelOne::init() {
     player->setPosition(MapController::getInstance()->getXPositionInWorld(6), MapController::getInstance()->getYPositionInWorld(3));
     player->setSize(10);
 
-    /********************
-    LJD
-    *******************/
-
-    auto monster1 = Animation::create();
-    this->addChild(monster1, "monster1");
-    monster1->addFrame("picture/monster/fire1.png");
-    monster1->addFrame("picture/monster/fire2.png");
-    monster1->start(0.1, -1);
-    monster1->addAbility(MonsterAI::create(monster1));
-
-    auto monster2 = Animation::create();
-    this->addChild(monster2, "monster2");
-    monster2->addFrame("picture/monster/fire1.png");
-    monster2->addFrame("picture/monster/fire2.png");
-    monster2->start(0.1, -1);
-    monster2->addAbility(MonsterAI::create(monster2));
-
-    auto monster3 = Animation::create();
-    this->addChild(monster3, "monster3");
-    monster3->addFrame("picture/monster/fire1.png");
-    monster3->addFrame("picture/monster/fire2.png");
-    monster3->start(0.1, -1);
-    monster3->addAbility(MonsterAI::create(monster3));
+    monsterCount = 0;
 
     return true;
 }
 
 void LevelOne::update() {
     Level::update();
-    //if (count >= CONST_FPS * 600) {
-    //    GameLog("LevelChange: LevelOne to LevelTwo");
-    //    SystemController::getInstance()->setNextLevel(LevelTwo::create());
-    //}
-    //++count;
+    if (count >= CONST_FPS * 2 && monsterCount < 3) {
+        createMonster();
+        count = 0;
+    }
+    ++count;
+}
+
+void LevelOne::createMonster() {
+    auto monster = Animation::create();
+    this->addChild(monster);
+    monster->addFrame("picture/monster/fire1.png");
+    monster->addFrame("picture/monster/fire2.png");
+    monster->start(0.1, -1);
+    monster->addAbility(MonsterAI::create(monster));
+
+    ++monsterCount;
+}
+
+void LevelOne::minusMonster() {
+    --monsterCount;
 }
 
 /********************

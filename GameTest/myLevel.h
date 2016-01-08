@@ -46,6 +46,7 @@ class LevelOne : public Level {
 private:
     int count;
     GameObject* go;
+    int monsterCount;
 public:
     LevelOne();
     ~LevelOne();
@@ -54,6 +55,9 @@ public:
 
     virtual bool init();
     virtual void update();
+
+    void createMonster();
+    void minusMonster();
 };
 
 class LevelTwo : public Level {

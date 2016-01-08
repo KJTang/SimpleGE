@@ -6,7 +6,7 @@
 #include "SoundController.h"
 
 const int WINNUM = 100;
-const float SUPER_TIME = 4;
+const float SUPER_TIME = 5;
 
 // ÔË¶¯Æ«ÒÆ
 const int deltaX[5] = { 0, 0, 0, -1, 1 };
