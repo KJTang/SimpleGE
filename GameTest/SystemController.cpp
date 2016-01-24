@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "Level.h"
+#include "SoundController.h"
 
 #pragma comment (lib, "Alpha_Engine.lib")
 // 取消使用freopen的警告
@@ -104,6 +105,7 @@ void SystemController::quitGame() {
 void SystemController::exit(void) {
     this->log("System: Exit");
      rootObject->destroy();
+     SoundController::getInstance()->releaseAllMusic();
     // Alpha系统退出
     AESysExit();
 }
