@@ -6,7 +6,9 @@ SoundController* SoundController::sharedController = nullptr;
 
 SoundController::SoundController() {}
 
-SoundController::~SoundController() {}
+SoundController::~SoundController() {
+    releaseAllMusic();
+}
 
 SoundController* SoundController::getInstance() {
     if (!sharedController) {
@@ -127,6 +129,8 @@ bool SoundController::releaseAllMusic() {
         }
     }
     playingSounds.clear();
+    loadedSounds.clear();
+    return true;
 }
 
 bool SoundController::setVolume(const std::string &filename, float vol) {
