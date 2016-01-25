@@ -33,6 +33,10 @@ private:
     void recursiveUpdate(GameObject* go);
     void recursiveDraw(GameObject* go);
     void recursiveClear(GameObject* go);
+
+    // record for destroy window
+    LPCSTR windowClassName; // record for destroy window
+    HINSTANCE hinstance;
 public:
     void update();
     void draw();
