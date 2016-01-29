@@ -7,7 +7,6 @@
 
 const int WINNUM = 151;
 const float SUPER_TIME = 5;
-int WHOISYOUDADDY = 0;
 
 // 运动偏移
 const int deltaX[5] = { 0, 0, 0, -1, 1 };
@@ -47,10 +46,14 @@ void PlayerControl::update() {
         onKeyDown(UP);
     } else if (AEInputCheckCurr(VK_LEFT)) {
         onKeyDown(LEFT);
-    } else if (AEInputCheckCurr(VK_RIGHT)) {
-        onKeyDown(RIGHT);
-	} else if (AEInputCheckCurr('C') && WHOISYOUDADDY == 0) {
-		WHOISYOUDADDY = 1;
+	} else if (AEInputCheckCurr(VK_RIGHT)) {
+		onKeyDown(RIGHT);
+	}
+
+	//super status
+	if (AEInputCheckCurr('C')) {
+		_playerState = 1;
+		static_cast<Animation*>(this->getOwner())->setSize(12.5);
 		printf("who is you daddy....");
 	}
 
@@ -229,11 +232,10 @@ void PlayerControl::eatBeans() {
         ++beans;
         bean->removeFromParent();
         SoundController::getInstance()->playMusic("music/eat.wav");
-        if (MapController::getInstance()->getObjectType(curX, curY) == 3 || WHOISYOUDADDY == 1) { // 吃到大力豆
+        if (MapController::getInstance()->getObjectType(curX, curY) == 3) { // 吃到大力豆
             _playerState = 1;
 			count = 0;
             static_cast<Animation*>(this->getOwner())->setSize(12.5);
-			WHOISYOUDADDY = 0;
         }
     }
 	if (beans==WINNUM) {
