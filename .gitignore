@@ -1,0 +1,9 @@
+.vs/*
+Debug/*
+Release/*
+x64/*
+GameTest/x64/*
+GameTest/Debug/*
+GameTest/Release/*
+*.opensdf
+*.sdf
